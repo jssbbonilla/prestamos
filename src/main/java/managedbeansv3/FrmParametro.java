@@ -1,4 +1,4 @@
-package managedbeansv2;
+package managedbeansv3;
 
 import entities.Parametro;
 import java.io.Serializable;

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Contratos</title>
+        <link href="../resources/css/styleExtension.css" rel="stylesheet" type="text/css" media="all" />
+    </h:head>
+    <h:body>
+
+        <h:form>  
+            <p:growl id="messages" showDetail="true"/>
+
+            <h2>Contratos</h2>
+            <p:menu toggleable="true" class="menucontrato">
+                <p:submenu label="Ajax">
+                    <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
+                    <p:menuitem value="Update" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+                </p:submenu>
+                <p:submenu label="Non-Ajax">
+                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
+                </p:submenu>
+                <p:submenu label="Navigations">
+                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+                </p:submenu>
+            </p:menu>
+        </h:form>
+        
+        <h:form>
+            <div style="background: #036fab; width: 80%; height: 800px;">
+                
+            </div>
+        </h:form>
+
+    </h:body>
+</html>
+

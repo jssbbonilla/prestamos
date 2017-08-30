@@ -11,7 +11,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import managedbeansv2.MetodosShare;
+import managedbeansv3.MetodosShare;
 import manager.ControladorCuota;
 import manager.ControladorParametro;
 import manager.ControladorPrestamo;

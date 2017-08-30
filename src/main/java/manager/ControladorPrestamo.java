@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import managedbeansv2.MensajesFormularios;
+import managedbeansv3.MensajesFormularios;
 import manager.ErrorHandlerApp;
 import services.Conexion;
 

@@ -4,7 +4,7 @@ import entities.Parametro;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import managedbeansv2.MensajesFormularios;
+import managedbeansv3.MensajesFormularios;
 import services.Conexion;
 
 
