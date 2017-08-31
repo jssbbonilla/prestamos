@@ -7,31 +7,225 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Contratos</title>
-        <link href="../resources/css/styleExtension.css" rel="stylesheet" type="text/css" media="all" />
+        <link href="../resources/css/styleContratos.css" rel="stylesheet" type="text/css" media="all" />
     </h:head>
     <h:body>
 
         <h:form>  
             <p:growl id="messages" showDetail="true"/>
+            <div class="header">
+                <label class="text-central">Contratos</label>
+            </div>
 
-            <h2>Contratos</h2>
             <p:menu toggleable="true" class="menucontrato">
-                <p:submenu label="Ajax">
-                    <p:menuitem value="Save" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
-                    <p:menuitem value="Update" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+                <p:submenu label="Contratos PDF" style="background: #c2dfef">
+                    <p:menuitem value="Nuevo" actionListener="#{menuView.save}" update="messages" icon="ui-icon-document" />
+                    <p:menuitem value="Imprimir" actionListener="#{menuView.save}" update="messages" icon="ui-icon-print" />
+                    <p:menuitem value="Descargar PDF" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
+                    <p:menuitem value="Actualizar" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
+                    <p:menuitem value="Eliminar" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
                 </p:submenu>
-                <p:submenu label="Non-Ajax">
-                    <p:menuitem value="Delete" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
-                </p:submenu>
-                <p:submenu label="Navigations">
-                    <p:menuitem value="External" url="http://www.primefaces.org" icon="ui-icon-home"/>
+                <p:submenu label="Menu principal" style="background: #c2dfef">
+                    <p:menuitem value="Clientes" outcome="/faces/pages/clientes.xhtml" icon="ui-icon-home"/>
+                    <p:menuitem value="Prestamos" outcome="/faces/pages/prestamos.xhtml" icon="ui-icon-home"/>
+                    <p:menuitem value="Historial de prestamos" outcome="/faces/pages/historialpagos.xhtml" icon="ui-icon-home"/>
+                    <p:menuitem value="Configuracion" outcome="/faces/pages/configuracion.xhtml" icon="ui-icon-home"/>
                 </p:submenu>
             </p:menu>
         </h:form>
-        
+
         <h:form>
-            <div style="background: #036fab; width: 80%; height: 800px;">
-                
+            <p:growl id="msgs" showDetail="true" />
+            <div id="azulito" class="div-contenedor"> </div>
+            <div class="div-frm-input">
+
+                <p:tabView dynamic="true" cache="true" >
+                    <p:tab title="Crear Contrato">
+                        <label style="color: #036fab; font-size: 25px; ">Datos del Contrato</label>
+
+                        <h:panelGrid columns="2">
+
+
+                            <h:panelGrid columns="2" style="margin-left: 5%; margin-top: 2%;">
+                                <p:outputLabel  for="titulocont" value="Titulo del Contrato: "/>
+                                <p:inputText  id="titulocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
+                                <p:outputLabel  for="compania" value="Compañia "/>
+                                <p:inputText  id="compania"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
+                                <p:outputLabel  for="tipocontrato" value="Tipo de Contrato: "/>
+                                <p:inputText  id="tipocontrato"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
+                                <p:outputLabel  for="objetocont" value="Objeto del contrato: "/>
+                                <p:inputText  id="objetocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
+                                <p:outputLabel  for="contraparte" value="Contraparte: "/>
+                                <p:inputText  id="contraparte"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="45" size="25" />
+                                <p:outputLabel value="Fecha Inicio:" for="fechainicio" />
+                                <p:calendar id="fechainicio"
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamos.sprestamo.fechaInicio}"
+                                            title="Fecha Inicio"
+                                            class="text-centrado"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                <p:outputLabel value="Fecha Fin:" for="fechafin" />
+                                <p:calendar id="fechafin"
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamos.sprestamo.fechaFin}"
+                                            title="Fecha Fin" 
+                                            class="text-centrado"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                <p:outputLabel value="Fecha de Firma: " for="fechafirma" />
+                                <p:calendar id="fechafirma"
+                                            mask="true"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
+                                            value="#{frmPrestamos.sprestamo.fechaFin}"
+                                            title="Fecha de Firma" 
+                                            class="text-centrado"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+                                <p:outputLabel value="Monto Aproximado" for="montoaprox" />
+                                <p:inputNumber id="montoaprox" value="#{frmPrestamos.sprestamo.valorCuota}" title="Monto aproximado de prestamo" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$"/>
+                                <p:outputLabel value="Comentarios: " for="comentarios" />
+                                <p:inputTextarea id="comentarios" value="#{frmPrestamos.sprestamo.observaciones}" title="Comentarios" cols="55" rows="4" />
+                            </h:panelGrid>
+                            <h:panelGrid columns="1">
+                                <p:commandButton id="btn-visualizar" icon="ui-icon-script"  
+                                                 class="btn-visualizar" 
+                                                 value="Visualizar"
+                                                 style="margin: 3%; margin-left: 15%;"
+                                                >        
+                                </p:commandButton>
+                                <p:commandButton id="btn-imprimir" icon="ui-icon-print"  
+                                                 class="btn-imprimir" 
+                                                 value="Imprimir"
+                                                 style="margin: 3%; margin-left: 15%; background: #2ecc71; border: none; "
+                                                >        
+                                </p:commandButton>
+                                <p:commandButton id="btn-guardar" icon="ui-icon-circle-plus"  
+                                                 class="btn-guardarcont" 
+                                                 value="Guardar"
+                                                 style="margin: 3%; margin-left: 15%; background: #F62A00; border: none;"
+                                                >        
+                                </p:commandButton>
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Contratos realizados">
+                        <p:dataTable value="#{frmPrestamos.lprestamo}" id="tb-paso" class="tableclass"
+                                     var="item" 
+                                     paginator="true"
+                                     rows="10"
+                                     rowsPerPageTemplate="10,15,20"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     selectionMode="single"
+                                     rowKey="#{item.idPrestamo}"
+                                     selection="#{frmPrestamos.sprestamo}"
+                                     >
+                            <p:ajax  event="rowSelect" listener="#{frmPrestamos.cambiarSeleccion}"/>
+                            <p:column headerText="n-prestamos" class="colum-id">
+                                <f:facet name="header">
+                                    <h:outputText value="ID"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPrestamo}"/>
+                            </p:column >
+                            <p:column headerText="DUI">
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{frmClientes.buscar(item.dui).nombre}"/>
+                            </p:column>
+                            <p:column headerText="Valor cuota" >
+                                <f:facet name="header">
+                                    <h:outputText value="Valor cuota"/>
+                                </f:facet>
+                                <h:outputText value="#{item.valorCuota}"/>
+                            </p:column>
+                            <p:column  headerText="Monto" >
+                                <f:facet name="header">
+                                    <h:outputText value="Monto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.monto}"/>
+                            </p:column>
+                            <p:column  headerText="Interes" >
+                                <f:facet name="header">
+                                    <h:outputText value="Interes"/>
+                                </f:facet>
+                                <h:outputText value="#{item.tasaInteres}"/>
+                            </p:column>
+                            <p:column headerText="Cuotas" >
+                                <f:facet name="header">
+                                    <h:outputText value="Cuotas"/>
+                                </f:facet>
+                                <h:outputText value="#{item.cantidadCuotas}"/>
+                            </p:column>
+                            <p:column headerText="Capitalizacion" >
+                                <f:facet name="header">
+                                    <h:outputText value="Capitalizacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.capitalizacion}"/>
+                            </p:column>
+                            <p:column  headerText="Fecha Inicio" >
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Inicio"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaInicio}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Fin" >
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha Fin"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaFin}"/>
+                            </p:column>
+                            <p:column headerText="Fecha Fin" >
+                                <f:facet name="header">
+                                    <h:outputText value="Ultimo Pago"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaUltimoPago}"/>
+                            </p:column>
+                            <p:column style="width: 110px">
+                                <f:facet name="header">
+                                </f:facet>
+                                <p:button id="btn-pagar"
+                                          icon="fa fa-fw fa-usd" 
+                                          class="btn-pagar"
+                                          title="Realizar Pago"
+                                          style="background-color: #2ecc71; border: none"
+                                          outcome="realizarpago.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
+                                          />
+                                <p:button id="btn-info" 
+
+                                          title="Detalles del prestamo" 
+                                          icon="fa fa-fw fa-info" 
+                                          outcome="prestamosdetalles.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
+                                          />
+                                <p:commandButton id="btn-eliminar"
+                                                 icon="fa fa-fw fa-close" 
+                                                 class="btn-eliminar"
+                                                 title="Eliminar prestamo"
+                                                 onclick="PF('cd').show()"
+
+                                                 style="background-color:red; border: none"
+                                                 />
+
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:tab>
+                </p:tabView>
+
+
+
             </div>
         </h:form>
 
