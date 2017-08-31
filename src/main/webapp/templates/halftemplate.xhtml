@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
+        <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+        <title>Sistema Prestamos</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:form>
+                <div class="arriba" >
+                    
+                    <div class="top-bar">
+                        <nav id="menu-nav" class="linkEffects linkHoverEffect_12 nav-cont">
+                            <ul>
+                               <a><p:link id="url1" class="scroll"  value="Ir al sistema"></p:link></a> 
+
+ 
+    <p:splitButton value="Usuario" actionListener="#{buttonView.save}" update="messages" icon="fa fa-user-circle-o" >
+        <p:menuitem value="Ver Perfil" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+        <p:menuitem value="Salir" actionListener="#{buttonView.delete}" ajax="false" icon="ui-icon-close" />
+        <p:separator />
+    </p:splitButton>
+
+                            </ul>
+                        </nav>  
+                        <h2 class="tituloheader"><i ></i> Administracion de Usuarios - Sistema de Prestamos <i  ></i></h2>
+
+
+                    </div>
+                </div>
+                </h:form>
+
+            </ui:insert>
+        </div>
+        
+        
+        <div>
+            
+            
+        </div>
+        <div>
+            
+            <div id="content" class="left_content" >
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+            
+            
+        </div>
+        
+        
+        <div id="bottom">
+            <ui:insert name="bottom">
+                
+                <!--footer-->
+                <footer class="mandarabajo">
+                    
+                    <div class="copyright">
+                        <div class="container">
+                            <p id="copy">© 2017 UES. Todos los derechos reservados | Diseñado por <a href="">Estudiante de Ingeniería.</a></p>
+                            <p id="copy2" class="oculto">© 2017 UES. Todos los derechos reservados</p>
+                        </div>
+                    </div>
+                </footer>      
+                <!--//footer-->
+                
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

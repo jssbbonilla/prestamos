@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Historial del Sistema</title>
+    </h:head>
+
+
+    <h:body>
+        <ui:composition template="../templates/halftemplate.xhtml">
+            <ui:define name="content">
+                <p:panel id="superior-externo">
+                <h:form id="frm-iniciocliente">
+                    <h:panelGrid id="panel-filtro" columns="3" style="background-color:  transparent ; padding-bottom: 5px">
+                        <p:outputLabel  value="Filtrar" />
+                        <p:inputText class="busqueda" type="text" value="#{frmClientes.busqueda}" />
+                          <p:commandButton id="btn-agregar-usuario" icon="ui-icon-circle-plus"  
+                                                     class="btn-agregar" 
+                                                     value="Agregar"
+                                                      onclick="PF('agregarUsuario').show();"
+
+                                                     update="user-edit-form:toggleable"
+
+                                                     ></p:commandButton>
+                    </h:panelGrid>    
+                </h:form>
+                <div id="user-edit">
+                    <h:form id="user-edit-form">
+                        <p:panel id="toggleable"   collapsed="#{frmUsuaros.busquedaActiva}" header="Opciones Usuario" toggleable="true" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:5px; ">
+
+
+
+                            <h:panelGrid columns="2" >
+                                <h:panelGrid columns="1">
+                                    <h:graphicImage id="clienteIcon"  style="background-color:  transparent" class="icon" name="#{frmClientes.imagenNuevo}"  height="130" width="130"/>
+
+
+
+                                </h:panelGrid>
+                                <h:panelGrid id="gridtwo" columns="10" style="text-align: left;" >
+
+                                    <p:inputText  id="nombrep"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="45" size="25" />
+                                    <p:selectOneMenu id="sexop" appendTo="@this" value="#{frmClientes.nuevoCliente.sexo}">
+                                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                        <f:selectItem itemLabel="Femenino" itemValue="F" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel  for="telefonop" value="Teléfono: "/>
+                                    <p:inputMask mask="9999-9999"  id="telefonop"  value="#{frmClientes.nuevoCliente.telefono}" maxlength="50" size="12"/>
+
+                                    <p:outputLabel for="fechaNacimientoN" value="Fecha de Nacimiento: " />
+                                    <p:calendar id="fechaNacimientoN"
+                                                mask="99/99/9999"
+                                                size="10"
+                                                pattern="dd/MM/yyyy" 
+                                                effect="blind" navigator="true" showOn="button" yearRange="-100:+0"
+                                                value="#{frmClientes.nuevoCliente.fechaNacimiento}"
+                                                >
+                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                    </p:calendar>
+
+                                    <p:commandButton  value="Registrar"  update="@all" icon="ui-icon-disk" actionListener="#{frmClientes.crearCliente()}" />
+                                    <p:commandButton value="Cancelar" 
+                                                     onclick="PF('agregarCliente').hide();"
+                                                     icon="ui-icon-cancel" 
+                                                     type="button"/>
+                                </h:panelGrid>
+                            </h:panelGrid>
+
+                        </p:panel>  
+                    </h:form>
+
+
+                </div>
+                </p:panel>
+                <div >
+                    <f:view>
+                        <h:form >
+                            <p:dataTable value="#{frmClientes.lcliente}" id="tb-clientes" class="tableclass"
+                                         var="item"     
+                                         paginator="true"
+                                         rows="25"
+                                         rowsPerPageTemplate="15,25,40"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         selectionMode="single"
+                                         rowKey="#{item.dui}"
+                                         selection="#{frmClientes.scliente}"
+                                         >
+                                <p:ajax event="rowSelect" listener="#{frmClientes.cambiarSeleccion}"/>
+                                <p:column headerText="Usuario" class="colum-id">
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dui}"/>
+                                </p:column >
+
+                                <p:column headerText="E-mail">
+                                    <f:facet name="header">
+                                        <h:outputText value="E-mail"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </p:column >
+
+                                <p:column headerText="Último acceso" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Último acceso"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaNacimiento}"/>
+                                </p:column>
+                                <p:column headerText="Rol / Privilegio" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Rol / Privilegio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.direcion}"/>
+                                </p:column>
+                                <p:column headerText="Estado" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.apellido}"/>
+                                </p:column>
+                                <p:column style="width: 70px">
+                                    <f:facet name="header">
+                                    </f:facet>
+
+                                    <p:commandButton id="btn-config" 
+                                                     icon="fa fa-wrench" 
+                                                     class="btn-config"
+                                                     title="Detalles"
+                                                     style="background-color:rgb(253, 152, 36); border: none
+                                                     "
+                                                     actionListener="#{frmUsuaros.activarBusqueda()}"
+                                                     update="user-edit-form:toggleable"
+
+                                                     >
+
+                                    </p:commandButton>
+                                  
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+                    </f:view>
+
+
+
+                    <p:growl id="msgs" showDetail="true" />  
+
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
+
+                </div>
+                
+                  <p:dialog id="dialogo-nuevo" 
+                              modal="false" 
+
+                              style="background-color:#EFEDEF; text-align: center" 
+                              showEffect="blind" hideEffect="blind" 
+                              widgetVar="agregarUsuario"   
+                              header="Agregar Usuario"  
+                              draggable="false" 
+                              closeOnEscape="true" 
+                              appendTo="@(body)" 
+
+                              resizable="false">
+                        <p:ajax event="close" 
+
+                                update="" 
+                                immediate="true" global="false" />
+                        <h:form>
+                            <h:panelGrid columns="2" >
+                                <h:panelGrid columns="1">
+                                    <p:outputLabel value="Foto de Cuenta"/>
+                                    <h:graphicImage id="clienteIcon"  style="background-color:  transparent" class="icon" name="#{frmClientes.imagenNuevo}"  height="130" width="130"/>
+                                    
+                                 
+                                 
+                                </h:panelGrid>
+                            <h:panelGrid id="grid" columns="2" style="text-align: left;" >
+                                <p:outputLabel  for="duip" value="Dui: " style="text-align: right;"/>
+                                <p:inputMask mask="99999999-9"  id="duip" value="#{frmClientes.nuevoCliente.dui}" maxlength="10" size="12" class="dialog-txt"/>
+
+                                <p:outputLabel  for="nitp" value="Nit: "/>
+                                <p:inputMask mask="9999-999999-999-9"  id="nitp" value="#{frmClientes.nuevoCliente.nit}" maxlength="17" size="18" class="dialog-txt"/>
+
+                                <p:outputLabel  for="nombrep" value="Nombre:"/>
+                                <p:inputText  id="nombrep"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="45" size="25" />
+
+                                <p:outputLabel  for="apellidop" value="Apellido:"/>
+                                <p:inputText  id="apellidop"  value="#{frmClientes.nuevoCliente.apellido}" maxlength="45" size="25"/>
+
+                                <p:outputLabel  for="sexop" value="Sexo:"/>
+                                <p:selectOneMenu id="sexop" appendTo="@this" value="#{frmClientes.nuevoCliente.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                <f:selectItem itemLabel="Femenino" itemValue="F" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel  for="telefonop" value="Teléfono: "/>
+                                <p:inputMask mask="9999-9999"  id="telefonop"  value="#{frmClientes.nuevoCliente.telefono}" maxlength="50" size="12"/>
+
+                                <p:outputLabel for="fechaNacimientoN" value="Fecha de Nacimiento: " />
+                                <p:calendar id="fechaNacimientoN"
+                                            mask="99/99/9999"
+                                            size="10"
+                                            pattern="dd/MM/yyyy" 
+                                            effect="blind" navigator="true" showOn="button" yearRange="-100:+0"
+                                            value="#{frmClientes.nuevoCliente.fechaNacimiento}"
+                                            >
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </p:calendar>
+
+                                <p:outputLabel for="direccionp" value="Direccion: "/>
+                                <p:inputTextarea id="direccionp" rows="5" cols="25" autoResize="true" value="#{frmClientes.nuevoCliente.direcion}"/>
+
+                                <p:outputLabel for="observacionesp"   value="Observaciones:  " />
+                                <p:inputTextarea id="observacionesp" rows="5" cols="25" autoResize="true" value="#{frmClientes.nuevoCliente.observacion}"/>
+
+                                <p:commandButton  value="Registrar"  update="@all" icon="ui-icon-disk" actionListener="#{frmClientes.crearCliente()}" />
+                                <p:commandButton value="Cancelar" 
+                                                 onclick="PF('agregarCliente').hide();"
+                                                 icon="ui-icon-cancel" 
+                                                 type="button"/>
+                            </h:panelGrid>
+                                </h:panelGrid>
+                        </h:form>
+                    </p:dialog>
+                
+                
+                <p:sticky target="superior-externo" />
+
+
+
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+</html>
+
