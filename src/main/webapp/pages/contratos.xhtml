@@ -48,7 +48,7 @@
 
                             <h:panelGrid columns="2" style="margin-left: 5%; margin-top: 2%;">
                                 <p:outputLabel  for="titulocont" value="Titulo del Contrato: "/>
-                                <p:inputText  id="titulocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
+                                <p:inputText  id="titulocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="30" size="55" />
                                 <p:outputLabel  for="compania" value="Compañia "/>
                                 <p:inputText  id="compania"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
                                 <p:outputLabel  for="tipocontrato" value="Tipo de Contrato: "/>
@@ -103,6 +103,7 @@
                                                  class="btn-visualizar" 
                                                  value="Visualizar"
                                                  style="margin: 3%; margin-left: 15%;"
+                                                 onclick="PF('Nprestamo').show();"
                                                 >        
                                 </p:commandButton>
                                 <p:commandButton id="btn-imprimir" icon="ui-icon-print"  
@@ -196,35 +197,34 @@
                             <p:column style="width: 110px">
                                 <f:facet name="header">
                                 </f:facet>
-                                <p:button id="btn-pagar"
-                                          icon="fa fa-fw fa-usd" 
-                                          class="btn-pagar"
-                                          title="Realizar Pago"
-                                          style="background-color: #2ecc71; border: none"
-                                          outcome="realizarpago.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
-                                          />
-                                <p:button id="btn-info" 
-
-                                          title="Detalles del prestamo" 
-                                          icon="fa fa-fw fa-info" 
-                                          outcome="prestamosdetalles.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
-                                          />
-                                <p:commandButton id="btn-eliminar"
-                                                 icon="fa fa-fw fa-close" 
-                                                 class="btn-eliminar"
-                                                 title="Eliminar prestamo"
-                                                 onclick="PF('cd').show()"
-
-                                                 style="background-color:red; border: none"
-                                                 />
-
+                                
                             </p:column>
                         </p:dataTable>
 
                     </p:tab>
                 </p:tabView>
+                
+                <p:dialog  modal="false" 
+                               appendTo="@(body)" 
+                               style="background-color:#EFEDEF; width: 80%;" 
+                               showEffect="blind" 
+                               hideEffect="blind" 
+                               widgetVar="Nprestamo" 
+                               draggable="false" 
+                               closeOnEscape="true" 
+                               resizable="true">
+                               
+                        <p:ajax event="close" 
 
+                                immediate="true" global="false" />
+                        
+                        <h:form id="visual-pdf">
+                            <p:media value="/resources/pdf/prueba.pdf" width="100%" height="400px"/>
+                            
+                        </h:form>
 
+                       
+                    </p:dialog>
 
             </div>
         </h:form>
