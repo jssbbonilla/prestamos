@@ -63,6 +63,9 @@ public class FrmPrestamos implements Serializable{
             sprestamo.fechaFin = metodo.utilDatetoSqlDate(sprestamo.getFechaFin().toString());
             sprestamo.estado = 'A';
             
+            //Luego hay que pasarle el valor correcto leido des configuracion
+            sprestamo.tasaMora=0.05;
+            
             cprestamo.agregar(sprestamo);
             nuevo();
         } else {

@@ -59,7 +59,7 @@ public class ControladorCliente extends Conexion implements Serializable {
 
         try {
 
-            UID("INSERT INTO cliente (dui, nit, nombres, apellidos, sexo, direccion, telefonos, observaciones, fecha_nacimiento) VALUES ('" + cli.dui + "', '" + cli.nit + "', '" + cli.nombre + "', '" + cli.apellido + "', '" + cli.sexo + "', '" + cli.direcion + "', '" + cli.telefono + "', '" + cli.observacion + "', '" + cli.fechaNacimiento + "')");
+            UID("INSERT INTO cliente (dui, nit, nombres, apellidos, sexo, direccion, telefonos, observaciones, fecha_nacimiento, profesion) VALUES ('" + cli.dui + "', '" + cli.nit + "', '" + cli.nombre + "', '" + cli.apellido + "', '" + cli.sexo + "', '" + cli.direcion + "', '" + cli.telefono + "', '" + cli.observacion + "', '" + cli.fechaNacimiento + "', '" + cli.profesion + "')");
             ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
                     .getExternalContext().getContext();
             String realPath = ctx.getRealPath("/");

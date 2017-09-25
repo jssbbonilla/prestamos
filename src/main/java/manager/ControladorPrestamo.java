@@ -32,7 +32,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
 
         try {
             cn.conexion();
-            cn.UID("INSERT INTO prestamo (id_prestamo,dui,monto,valor_cuota,tasa_interes,cantidad_cuotas,fecha_inicio,fecha_fin,fecha_ultimo_pago,saldo,estado,observaciones, capitalizacion) VALUES ('" + idPrestamo + "','" + p.dui + "','" + p.monto + "','" + p.valorCuota + "','" + p.tasaInteres + "','" + p.cantidadCuotas + "','" + fechaInicio + "','" + p.fechaFin + "','" + fechaUltimoPago + "','" + p.monto + "','" + p.estado + "','" + p.observaciones + "','" + p.capitalizacion +"');");
+            cn.UID("INSERT INTO prestamo (id_prestamo,dui,monto,valor_cuota,tasa_interes,cantidad_cuotas,fecha_inicio,fecha_fin,fecha_ultimo_pago,saldo,estado,observaciones, capitalizacion, tasa_mora) VALUES ('" + idPrestamo + "','" + p.dui + "','" + p.monto + "','" + p.valorCuota + "','" + p.tasaInteres + "','" + p.cantidadCuotas + "','" + fechaInicio + "','" + p.fechaFin + "','" + fechaUltimoPago + "','" + p.monto + "','" + p.estado + "','" + p.observaciones + "','" + p.capitalizacion +"','" + p.tasaMora +"');");
             mensaje.msgCreadoExito();
         } catch (Exception e) {
             ep.nuevo("Advertencia: ", e.getStackTrace().toString(), e.getMessage());

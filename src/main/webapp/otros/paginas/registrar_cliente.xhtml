@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template"/>
+        <meta name="author" content="GeeksLabs"/>
+        <meta name="keyword" content="Creative, Inicio, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal"/>
+        <link rel="shortcut icon" href="img/favicon.png"/>
+
+        <title>Sistema Prestamos - Registro de Cliente</title>
+
+        <!-- Bootstrap CSS -->    
+        <link href="../resources/plantilla_prestamo/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- bootstrap theme -->
+        <link href="../resources/plantilla_prestamo/css/bootstrap-theme.css" rel="stylesheet"/>
+        <!--external css-->
+        <!-- font icon -->
+        <link href="../resources/plantilla_prestamo/css/elegant-icons-style.css" rel="stylesheet" />
+        <link href="../resources/plantilla_prestamo/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- Custom styles -->
+        <link href="../resources/plantilla_prestamo/css/style.css" rel="stylesheet"/>
+        <link href="../resources/plantilla_prestamo/css/style-responsive.css" rel="stylesheet" />
+
+
+        <link rel="stylesheet" href="../resources/plantilla_prestamo/css/datepicker.css"/>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+          <script src="js/lte-ie7.js"></script>
+        <![endif]-->
+    </head>
+
+    <h:body onload="comprobarMensaje(#{frmCliente.estado}, '#{frmCliente.titulo}', '#{frmCliente.mensaje}')">
+        <!-- container section start -->
+        <section id="container" class="">
+
+
+            <header class="header dark-bg">
+                <div class="toggle-nav">
+                    <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+                </div>
+
+                <!--logo start-->
+                <a href="index.jsf" class="logo">Sistema <span class="lite">Prestamo</span></a>
+                <!--logo end-->
+
+                <div class="nav search-row" id="top_menu">
+                    <!--  search form start -->
+                    <ul class="nav top-menu">                    
+                        <li>
+                            <form class="navbar-form">
+
+                            </form>
+                        </li>                    
+                    </ul>
+                    <!--  search form end -->                
+                </div>
+
+                <div class="top-nav notification-row">                
+                    <!-- notificatoin dropdown start-->
+                    <ul class="nav pull-right top-menu">
+
+                        <!-- task notificatoin start -->
+
+                        <!-- task notificatoin end -->
+                        <!-- inbox notificatoin start-->
+
+                        <!-- inbox notificatoin end -->
+                        <!-- alert notification start-->
+
+                        <!-- user login dropdown end -->
+                    </ul>
+                    <!-- notificatoin dropdown end-->
+                </div>
+            </header>      
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu">                
+                        <li class="active">
+                            <a class="" href="index.jsf">
+                                <i class="icon_house_alt"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu">
+                            <a  class="" href="prestamos.jsf">
+                                <i class="icon_document_alt"></i>
+                                <span>Prestamos</span>
+                            </a>
+                        </li>
+                        <!--li class="sidebar-menu">
+                            <a  class="" href="pagos.jsf">
+                                <i class="icon_documents_alt"></i>
+                                <span>Pagos</span>
+                            </a>
+                        </li-->
+                        <li class="sidebar-menu">
+                            <a  class="" href="clientes.jsf">
+                                <i class="icon_desktop"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- sidebar menu end-->
+                </div>
+            </aside>
+            <!--sidebar end-->
+
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="page-header"><i class="fa fa fa-bars"></i> Registrar Cliente</h3>
+                            <ol class="breadcrumb">
+                                <li><i class="fa fa-home"></i><a href="index.jsf">Home</a></li>
+                                <li><i class="fa fa-square-o"></i>Registrar Cliente</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- page start-->
+
+                    <h1 style="margin-bottom: 5px; margin-top: 0px"> Datos</h1>
+                    <h:form id="form1" class="form-horizontal" role="form">
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">DUI</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control" id="txtDui" value="#{frmCliente.nuevo.dui}" maxlength="10" size="10" required="true" requiredMessage="Ingrese el DUI del nuevo cliente." validatorMessage="Ingrese un DUI válido.">
+                                    <f:validateRegex pattern="[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[0-9]"/>
+                                </h:inputText>
+                            </div>
+                            <h:message for="txtDui" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">NIT</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control" id="txtNit" value="#{frmCliente.nuevo.nit}" maxlength="17" size="17" required="true" requiredMessage="Ingrese el NIT del nuevo cliente." validatorMessage="Ingrese un NIT válido.">
+                                    <f:validateRegex pattern="[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9]"/>
+                                </h:inputText>
+                            </div>
+                            <h:message for="txtNit" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Nombres</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control" id="txtNombres" value="#{frmCliente.nuevo.nombres}" required="true" requiredMessage="Ingrese los nombres del nuevo cliente."/>
+                            </div>
+                            <h:message for="txtNombres" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Apellidos</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control" id="txtApellidos" value="#{frmCliente.nuevo.apellidos}" required="true" requiredMessage="Ingrese los apellidos del nuevo cliente."/>
+                            </div>
+                            <h:message for="txtApellidos" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Sexo</label>
+                            <div class="col-lg-7">
+                                <h:selectOneRadio id="btngSexo" value="#{frmCliente.nuevo.sexo}" required="true" requiredMessage="Seleccione el sexo del nuevo cliente.">
+                                    <f:selectItem itemValue="M" itemLabel="_Masculino_" />
+                                    <f:selectItem itemValue="F" itemLabel="_Femenino_"/>
+                                </h:selectOneRadio>
+                            </div>
+                            <h:message for="btngSexo" style="color:red;margin:8px;" />
+                        </div>
+
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Fecha de Nacimiento</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control datepicker" id="txtInicio" value="#{frmCliente.nuevo.fechaNacimiento}" required="true" requiredMessage="Ingrese la fecha de nacimiento del cliente." converterMessage="Ingrese un formato de dato válido.">
+                                    <f:convertDateTime pattern="dd/MMM/yyyy"/>
+                                </h:inputText>
+                            </div>
+                            <h:message for="txtInicio" style="color:red;margin:8px;" />
+                        </div>
+
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Direccion</label>
+                            <div class="col-lg-7">
+                                <h:inputText id="txtDireccion" class="form-control" value="#{frmCliente.nuevo.direccion}" required="true" requiredMessage="Ingrese la dirección del nuevo cliente."/>
+                            </div>
+                            <h:message for="txtDireccion" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Telefonos</label>
+                            <div class="col-lg-7">
+                                <h:inputText id="txtTelefonos" class="form-control" value="#{frmCliente.nuevo.telefonos}" required="true" requiredMessage="Ingrese al menos un teléfono del nuevo cliente."/>
+                            </div>
+                            <h:message for="txtTelefonos" style="color:red;margin:8px;" />
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-offset-5 col-lg-10">
+                                <!-- Trigger the modal with a button -->
+                                <h:commandButton value="Registrar Cliente" class="btn btn-info btn-lg btn-primary" actionListener="#{frmCliente.agregar()}"/>
+                            </div>
+                        </div>  
+                    </h:form>
+                    <!-- page end-->
+                </section>
+            </section>
+            <!--main content end-->
+        </section>
+        <!-- container section end -->
+        <!-- javascripts -->
+        <script src="../resources/plantilla_prestamo/js/jquery.js"></script>
+        <script src="../resources/plantilla_prestamo/js/bootstrap.min.js"></script>
+        <!-- nice scroll -->
+        <script src="../resources/plantilla_prestamo/js/jquery.scrollTo.min.js"></script>
+        <script src="../resources/plantilla_prestamo/js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
+        <script src="../resources/plantilla_prestamo/js/scripts.js"></script>
+
+        <script src="../resources/plantilla_prestamo/js/bootstrap-growl.min.js"></script>
+        <script src="../resources/plantilla_prestamo/js/jquery-ui-1.12.1.js"></script>
+
+        <script>
+
+        function comprobarMensaje(tipo, titulo, mensaje) {
+            if (tipo == 1) {
+                window.location.href = "clientes.jsf";
+            } else if (tipo == 2) {
+                $.growl({
+                    title: titulo,
+                    message: mensaje
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+
+        $(function () {
+            $(".datepicker").datepicker({dateFormat: 'dd/M/yy'});
+        });
+        </script>
+    </h:body>
+</html>
+

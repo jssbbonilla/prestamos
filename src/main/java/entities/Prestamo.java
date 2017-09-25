@@ -32,6 +32,7 @@ public class Prestamo  implements Serializable{
     public char estado;
     public String observaciones;
     public char capitalizacion;
+    public double tasaMora;
     
     Cliente ecliente = new Cliente();
     Cuota ecuota = new Cuota();
@@ -176,6 +177,14 @@ public class Prestamo  implements Serializable{
 
     public void setCparametro(ControladorParametro cparametro) {
         this.cparametro = cparametro;
+    }
+
+    public double getTasaMora() {
+        return tasaMora;
+    }
+
+    public void setTasaMora(double tasaMora) {
+        this.tasaMora = tasaMora;
     }
 
     

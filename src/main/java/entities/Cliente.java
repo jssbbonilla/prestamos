@@ -16,6 +16,7 @@ public class Cliente implements Serializable {
     public String telefono;
     public Date fechaNacimiento;
     public String observacion;
+    public String profesion;
 
     public String getDui() {
         return dui;
@@ -87,6 +88,14 @@ public class Cliente implements Serializable {
 
     public void setObservacion(String observacion) {
         this.observacion = observacion;
+    }
+
+    public String getProfesion() {
+        return profesion;
+    }
+
+    public void setProfesion(String profesion) {
+        this.profesion = profesion;
     }
 
     /*------- Anadido Getter and Setter-----*/

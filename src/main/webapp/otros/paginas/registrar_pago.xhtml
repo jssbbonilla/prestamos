@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template"/>
+        <meta name="author" content="GeeksLabs"/>
+        <meta name="keyword" content="Creative, Inicio, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal"/>
+        <link rel="shortcut icon" href="../resources/plantilla_prestamo/img/favicon.png"/>
+
+        <title>Sistema Prestamos - Registro de Pago</title>
+
+        <!-- Bootstrap CSS -->    
+        <link href="../resources/plantilla_prestamo/css/bootstrap.min.css" rel="stylesheet"/>
+        <!-- bootstrap theme -->
+        <link href="../resources/plantilla_prestamo/css/bootstrap-theme.css" rel="stylesheet"/>
+        <!--external css-->
+        <!-- font icon -->
+        <link href="../resources/plantilla_prestamo/css/elegant-icons-style.css" rel="stylesheet" />
+        <link href="../resources/plantilla_prestamo/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- Custom styles -->
+        <link href="../resources/plantilla_prestamo/css/style.css" rel="stylesheet"/>
+        <link href="../resources/plantilla_prestamo/css/style-responsive.css" rel="stylesheet" />
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+        <!--[if lt IE 9]>
+          <script src="js/html5shiv.js"></script>
+          <script src="js/respond.min.js"></script>
+          <script src="js/lte-ie7.js"></script>
+        <![endif]-->
+    </h:head>
+
+    <h:body onload="comprobarMensaje(#{frmPrestamo.estado}, '#{frmPrestamo.titulo}', '#{frmPrestamo.mensaje}')">
+        <!-- container section start -->
+        <section id="container" class="">
+
+
+            <header class="header dark-bg">
+                <div class="toggle-nav">
+                    <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
+                </div>
+
+                <!--logo start-->
+                <a href="index.jsf" class="logo">Sistema <span class="lite">Prestamo</span></a>
+                <!--logo end-->
+
+                <div class="nav search-row" id="top_menu">
+                    <!--  search form start -->
+                    <ul class="nav top-menu">                    
+                        <li>
+                            <form class="navbar-form">
+
+                            </form>
+                        </li>                    
+                    </ul>
+                    <!--  search form end -->                
+                </div>
+
+                <div class="top-nav notification-row">                
+                    <!-- notificatoin dropdown start-->
+                    <ul class="nav pull-right top-menu">
+
+                        <!-- task notificatoin start -->
+
+                        <!-- task notificatoin end -->
+                        <!-- inbox notificatoin start-->
+
+                        <!-- inbox notificatoin end -->
+                        <!-- alert notification start-->
+
+                        <!-- user login dropdown end -->
+                    </ul>
+                    <!-- notificatoin dropdown end-->
+                </div>
+            </header>      
+            <!--header end-->
+
+            <!--sidebar start-->
+            <aside>
+                <div id="sidebar"  class="nav-collapse ">
+                    <!-- sidebar menu start-->
+                    <ul class="sidebar-menu">                
+                        <li class="active">
+                            <a class="" href="index.jsf">
+                                <i class="icon_house_alt"></i>
+                                <span>Inicio</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu">
+                            <a  class="" href="prestamos.jsf">
+                                <i class="icon_document_alt"></i>
+                                <span>Prestamos</span>
+                            </a>
+                        </li>
+                        <!--li class="sidebar-menu">
+                            <a  class="" href="pagos.jsf">
+                                <i class="icon_documents_alt"></i>
+                                <span>Pagos</span>
+                            </a>
+                        </li-->
+                        <li class="sidebar-menu">
+                            <a  class="" href="clientes.jsf">
+                                <i class="icon_desktop"></i>
+                                <span>Clientes</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!-- sidebar menu end-->
+                </div>
+            </aside>
+            <!--sidebar end-->
+            <!--main content start-->
+            <section id="main-content">
+                <section class="wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h3 class="page-header"><i class="fa fa fa-bars"></i> Registrar Pago</h3>
+                            <ol class="breadcrumb">
+                                <li><i class="fa fa-home"></i><a href="index.jsf">Home</a></li>
+                                <li><i class="fa fa-square-o"></i>Registrar Pago</li>
+                            </ol>
+                        </div>
+                    </div>
+
+
+
+                    <h1 style="margin: 5px;">Datos</h1><br/>
+                    <h:form class="form-horizontal col-lg-12" role="form">
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Nº del Préstamo</label>
+                            <div class="col-lg-7">
+                                <input disabled="true" type="text" class="form-control" id="c-name" value="#{frmPrestamo.cuota.cuotaPK.idPrestamo}"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Nº de la Cuota</label>
+                            <div class="col-lg-7">
+                                <input disabled="true" type="text" class="form-control" id="b-day" value="#{frmPrestamo.cuota.cuotaPK.numCuota}"/>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Valor de la Cuota</label>
+                            <div class="col-lg-7">
+                                <h:inputText class="form-control" id="txtValor" value="#{frmPrestamo.cuota.valor}" required="true" requiredMessage="Ingrese el valor de la cuota." validatorMessage="Ingrese un valor válido para la cuota." converterMessage="Ingrese un formato de dato válido.">
+                                    <f:validateDoubleRange minimum="#{frmPrestamo.modificar.valorCuota}" maximum="#{frmPrestamo.maxCuota}" />
+                                </h:inputText>
+                            </div>
+                            <h:message for="txtValor" style="color:red;margin:8px;"/>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label"></label>
+                            <div class="col-lg-7">
+                                * La cuota debe de ser entre $
+                                <h:outputText value="#{frmPrestamo.modificar.valorCuota}">
+                                    <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                </h:outputText>
+                                y $
+                                <h:outputText value="#{frmPrestamo.maxCuota}">
+                                    <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                </h:outputText>
+                            </div>
+                        </div>
+
+                        <br/>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-offset-5 col-lg-10">
+                                <h:commandButton value="Calcular Valores" class="btn btn-info btn-lg btn-primary" actionListener="#{frmPrestamo.datosActualizar()}"/>
+                            </div>
+                        </div>  
+                        <br/>
+
+                        <div class="row" style="margin-bottom: 5px;">
+                            <label class="col-lg-2 control-label">Interés</label>
+                            <div class="col-lg-7">
+                                <h:inputText disabled="true" class="form-control" id="b-interes" value="#{frmPrestamo.cuota.interes}">
+                                    <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                </h:inputText>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 15px;">
+                            <label class="col-lg-2 control-label">Capital</label>
+                            <div class="col-lg-7">
+                                <h:inputText disabled="true" class="form-control" id="f-capital" value="#{frmPrestamo.cuota.capital}">
+                                    <f:convertNumber maxFractionDigits="2"></f:convertNumber>
+                                </h:inputText>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom: 5px;">
+                            <div class="col-lg-offset-5 col-lg-10">                                <!-- Trigger the modal with a button -->
+                                <h:commandButton value="Registrar Préstamo - Prueba" class="btn btn-info btn-lg btn-primary" actionListener="#{frmPrestamo.actualizar()}"/>
+                            </div>
+                        </div>  
+                    </h:form>
+
+                    <!-- page end-->
+                </section>
+            </section>
+            <!--main content end-->
+        </section>
+        <!-- container section end -->
+        <!-- javascripts -->
+        <script src="../resources/plantilla_prestamo/jquery.bootstrap-growl.js"></script>
+        <script src="../resources/plantilla_prestamo/js/jquery.js"></script>
+        <script src="../resources/plantilla_prestamo/js/bootstrap.min.js"></script>
+        <!-- nice scroll -->
+        <script src="../resources/plantilla_prestamo/js/jquery.scrollTo.min.js"></script>
+        <script src="../resources/plantilla_prestamo/js/jquery.nicescroll.js" type="text/javascript"></script><!--custome script for all page-->
+        <script src="../resources/plantilla_prestamo/js/scripts.js"></script>
+
+
+        <script>
+        function comprobarMensaje(tipo, titulo, mensaje) {
+            if (tipo == 1) {
+                window.location.href = "prestamos.jsf";
+            } else if (tipo == 2) {
+                $.growl({
+                    title: titulo,
+                    message: mensaje
+                }, {
+                    type: 'danger'
+                });
+            }
+        }
+        </script>
+    </h:body>
+</html>
