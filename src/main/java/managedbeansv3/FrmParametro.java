@@ -43,7 +43,7 @@ public class FrmParametro implements Serializable{
             if (eparametro.validarParametro() == true) {
                 cparametro.agregarParametro(eparametro);
             } else {
-                mensaje.msgFaltanCampos();
+                mensaje.msgErrorValorIncorrecto();
             }
             eparametro = new Parametro();
             eparametro.idParametro =2;
@@ -53,7 +53,7 @@ public class FrmParametro implements Serializable{
             if (eparametro.validarParametro() == true) {
                 cparametro.agregarParametro(eparametro);
             } else {
-                mensaje.msgFaltanCampos();
+                mensaje.msgErrorValorIncorrecto();
             }
             
             eparametro = new Parametro();
@@ -65,7 +65,7 @@ public class FrmParametro implements Serializable{
             if (eparametro.validarParametro() == true) {
                 cparametro.agregarParametro(eparametro);
             } else {
-                mensaje.msgFaltanCampos();
+                mensaje.msgErrorValorIncorrecto();
             }
             
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class FrmParametro implements Serializable{
         }
         } 
         else {
-                mensaje.msgFaltanCampos();
+               mensaje.msgErrorValorIncorrecto();
             }
         
     }

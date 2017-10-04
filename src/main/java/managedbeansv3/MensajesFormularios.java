@@ -52,4 +52,11 @@ public class MensajesFormularios {
     public void msgAdvertenciaAlEliminar() {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Cliente invalido" , "Porfavor seleccione un cliente"));
     }
+    public void msgGuardadoExito() {
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado!", "Realizado con exito");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    public void msgErrorValorIncorrecto() {
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "valor incorrecto"));
+    }
 }

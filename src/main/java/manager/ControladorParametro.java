@@ -94,10 +94,9 @@ public class ControladorParametro extends Conexion implements Serializable{
     }
     
     public void agregarParametro(Parametro param) {
-
         try {
             UID("INSERT INTO prestamos.parametro (id_parametro, nombre, valor) VALUES ('" + param.idParametro + "', '" + param.nombre + "', '" + param.valor + "')");
-            mensaje.msgPagoExito();
+            mensaje.msgGuardadoExito();
         } catch (Exception e) {
             ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
             mensaje.msgErrorAlCrear();
