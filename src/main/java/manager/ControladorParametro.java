@@ -1,5 +1,6 @@
 package manager;
 
+import entities.Cuota;
 import entities.Parametro;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,9 +22,9 @@ public class ControladorParametro extends Conexion implements Serializable{
         
         try {
             param = new Parametro();
-            rst = getValores("SELECT * FROM prestamos.parametro WHERE id='" + s + "'");
+            rst = getValores("SELECT * FROM prestamos.parametro WHERE id_parametro='" + s + "'");
             while (rst.next()) {
-                param.setIdParametro(rst.getInt("id"));
+                param.setIdParametro(rst.getInt("id_parametro"));
                 param.setNombre(rst.getString("nombre"));
                 param.setValor(rst.getString("valor"));
                 parametros.add(param);
@@ -47,7 +48,7 @@ public class ControladorParametro extends Conexion implements Serializable{
             rst = getValores("SELECT * FROM parametro");
             while (rst.next()) {
                 param = new Parametro();
-                param.setIdParametro(rst.getInt("id"));
+                param.setIdParametro(rst.getInt("id_parametro"));
                 param.setNombre(rst.getString("nombre"));
                 param.setValor(rst.getString("valor"));
                 parametros.add(param);
@@ -76,5 +77,41 @@ public class ControladorParametro extends Conexion implements Serializable{
             mensaje.msgErrorAlModificar();
         }
     }
+    
+    public void eliminarParamentro(Parametro param) {
+        try {
+            if (param == null) {
+                System.err.println("Prestamo invalido , verfique los datos");
+                mensaje.msgAdvertenciaAlEliminar();
+            } else {
+                UID("DELETE FROM parametro WHERE id='" + param.idParametro + "'");
+                mensaje.msgEliminacion();
+            }
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            mensaje.msgErrorAlEliminar();
+        }
+    }
+    
+    public void agregarParametro(Parametro param) {
+
+        try {
+            UID("INSERT INTO prestamos.parametro (id_parametro, nombre, valor) VALUES ('" + param.idParametro + "', '" + param.nombre + "', '" + param.valor + "')");
+            mensaje.msgPagoExito();
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            mensaje.msgErrorAlCrear();
+        }
+    }
+    
+    public void eliminarTodosParametros(){
+        try {
+            UID("TRUNCATE TABLE prestamos.parametro;");
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            mensaje.msgErrorAlEliminar();
+        }
+    }
+   
     
 }

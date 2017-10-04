@@ -40,7 +40,7 @@ public class Parametro implements Serializable{
     public boolean validarParametro() {
         boolean validacion = false;
         if ((idParametro <= 0) != true && (nombre.isEmpty()) != true
-                && (Double.parseDouble(valor) <= 0) != true) {
+                && (Double.parseDouble(valor) < 0) != true) {
             validacion = true;
         } else {
             validacion = false;

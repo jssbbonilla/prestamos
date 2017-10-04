@@ -30,16 +30,18 @@ public class FrmParametro implements Serializable{
     }
     
     public void guardarConfiguracion(){
-        if ((interesMensual <=0) != true && (interesMensual <=0) != true
-                && (mora <= 0) != true) {
+        if ((interesMensual <0) != true && (interesMensual <0) != true
+                && (mora < 0) != true) {
             
         try {
+            cparametro.eliminarTodosParametros();
+            
             eparametro.idParametro =1;
             eparametro.nombre = String.valueOf("interes_mensual");
             eparametro.valor = String.valueOf(interesMensual);
             
             if (eparametro.validarParametro() == true) {
-                cparametro.modificarParametro(eparametro);
+                cparametro.agregarParametro(eparametro);
             } else {
                 mensaje.msgFaltanCampos();
             }
@@ -49,7 +51,7 @@ public class FrmParametro implements Serializable{
             eparametro.valor = String.valueOf(interesDiario);
             
             if (eparametro.validarParametro() == true) {
-                cparametro.modificarParametro(eparametro);
+                cparametro.agregarParametro(eparametro);
             } else {
                 mensaje.msgFaltanCampos();
             }
@@ -61,7 +63,7 @@ public class FrmParametro implements Serializable{
             
             
             if (eparametro.validarParametro() == true) {
-                cparametro.modificarParametro(eparametro);
+                cparametro.agregarParametro(eparametro);
             } else {
                 mensaje.msgFaltanCampos();
             }
@@ -69,7 +71,8 @@ public class FrmParametro implements Serializable{
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
-        } else {
+        } 
+        else {
                 mensaje.msgFaltanCampos();
             }
         

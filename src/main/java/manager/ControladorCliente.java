@@ -41,6 +41,7 @@ public class ControladorCliente extends Conexion implements Serializable {
                 cliente.setObservacion(rst.getString("observaciones"));
                 cliente.setSexo(rst.getString("sexo").charAt(0));
                 cliente.setTelefono(rst.getString("telefonos"));
+                cliente.setProfesion(rst.getString("profesion"));
                 clientes.add(cliente);
             }
             return clientes;
@@ -113,7 +114,7 @@ public class ControladorCliente extends Conexion implements Serializable {
                 System.err.println("Cliente invalido , verfique los datos");
 
             } else {
-                UID("UPDATE prestamos.cliente SET nombres='" + cli.nombre + "', apellidos='" + cli.apellido + "', sexo='" + cli.sexo + "', direccion='" + cli.direcion + "', telefonos='" + cli.telefono + "', fecha_nacimiento='" + cli.fechaNacimiento + "', observaciones='" + cli.observacion + "' WHERE dui='" + cli.dui + "'");
+                UID("UPDATE prestamos.cliente SET nombres='" + cli.nombre + "', apellidos='" + cli.apellido + "', sexo='" + cli.sexo + "', direccion='" + cli.direcion + "', telefonos='" + cli.telefono + "', fecha_nacimiento='" + cli.fechaNacimiento + "', observaciones='" + cli.observacion + "', profesion='" + cli.profesion + "' WHERE dui='" + cli.dui + "'");
                 mensaje.msgModificacion();
             }
         } catch (Exception e) {
@@ -147,6 +148,7 @@ public class ControladorCliente extends Conexion implements Serializable {
                 cliente.setObservacion(rst.getString("observaciones"));
                 cliente.setSexo(rst.getString("sexo").charAt(0));
                 cliente.setTelefono(rst.getString("telefonos"));
+                cliente.setProfesion(rst.getString("profesion"));
 
                 Documento documento = new Documento();
 

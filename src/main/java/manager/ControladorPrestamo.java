@@ -62,6 +62,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 salida.add(p);
 
             }
@@ -79,7 +80,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
     public void modificar(Prestamo p) {
         try {
             cn.conexion();
-            cn.UID("UPDATE prestamos.prestamo SET monto='" + p.monto + "', valor_cuota='" + p.valorCuota + "', tasa_interes='" + p.tasaInteres + "', cantidad_cuotas='" + p.cantidadCuotas + "', fecha_inicio='" + p.fechaInicio + "', fecha_fin='" + p.fechaFin + "', fecha_ultimo_pago='" + p.fechaUltimoPago + "', saldo='" + p.saldo + "', observaciones='" + p.observaciones + "', capitalizacion='"+ p.capitalizacion+"' WHERE id_prestamo='" + p.idPrestamo + "'");
+            cn.UID("UPDATE prestamos.prestamo SET monto='" + p.monto + "', valor_cuota='" + p.valorCuota + "', tasa_interes='" + p.tasaInteres + "', cantidad_cuotas='" + p.cantidadCuotas + "', fecha_inicio='" + p.fechaInicio + "', fecha_fin='" + p.fechaFin + "', fecha_ultimo_pago='" + p.fechaUltimoPago + "', saldo='" + p.saldo + "', observaciones='" + p.observaciones + "', capitalizacion='"+ p.capitalizacion+"', tasa_mora='"+ p.tasaMora+"' WHERE id_prestamo='" + p.idPrestamo + "'");
             mensaje.msgModificacion();
         } catch (Exception e) {
             ep.nuevo("Advertencia", e.getStackTrace().toString(), e.getMessage());
@@ -125,6 +126,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 prestamos.add(p);
             }
             return prestamos;
@@ -178,6 +180,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 prestamos.add(p);
             }
             return prestamos;
@@ -211,6 +214,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 prestamos.add(p);
             }
             return prestamos;
@@ -257,6 +261,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 salida.add(p);
             }
             return salida;
@@ -267,6 +272,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
         } finally {
             closeconexion();
         }}
+      
       public List<Prestamo> Obtenerid(String s) {
         List<Prestamo> salida = new ArrayList<Prestamo>();
         try {
@@ -287,6 +293,7 @@ public class ControladorPrestamo extends Conexion implements Serializable {
                 p.setEstado(rst.getString("estado").charAt(0));
                 p.setObservaciones(rst.getString("observaciones"));
                 p.setCapitalizacion(rst.getString("capitalizacion").charAt(0));
+                p.setTasaMora(rst.getDouble("tasa_mora"));
                 salida.add(p);
             }
             return salida;
