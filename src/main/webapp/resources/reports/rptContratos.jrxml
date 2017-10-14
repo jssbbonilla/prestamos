@@ -11,51 +11,39 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<staticText>
-				<reportElement x="136" y="18" width="257" height="38" uuid="43d54c41-06b8-43b6-aeee-118109f96720"/>
+				<reportElement x="98" y="13" width="350" height="38" uuid="43d54c41-06b8-43b6-aeee-118109f96720"/>
 				<textElement>
-					<font fontName="Droid Sans" size="24" isBold="true"/>
+					<font fontName="Droid Sans" size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Contrato de Pestamo]]></text>
+				<text><![CDATA[CONTRATO DE PRESTAMO DE DINERO]]></text>
 			</staticText>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<staticText>
-				<reportElement x="36" y="15" width="100" height="20" uuid="72e73da8-a905-454f-8792-404134315056"/>
+				<reportElement x="66" y="0" width="103" height="20" uuid="72e73da8-a905-454f-8792-404134315056"/>
+				<textElement>
+					<font fontName="DialogInput"/>
+				</textElement>
 				<text><![CDATA[Ingresado por:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="182" y="15" width="100" height="20" uuid="826506da-41b0-46fc-a5ef-ac2ca578550b"/>
+				<reportElement x="169" y="0" width="279" height="20" uuid="826506da-41b0-46fc-a5ef-ac2ca578550b"/>
+				<textElement>
+					<font fontName="DialogInput"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{txtUsuario}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
-			<staticText>
-				<reportElement x="25" y="41" width="100" height="20" uuid="da4c8f72-69e7-4d17-97c3-e3dfd06e923b"/>
-				<text><![CDATA[nombres]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="182" y="41" width="100" height="20" uuid="aefe78f4-69cf-40d2-ab34-9620462b670e"/>
-				<text><![CDATA[apellidos]]></text>
-			</staticText>
-		</band>
+		<band height="20" splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
-			<textField>
-				<reportElement x="25" y="11" width="100" height="20" uuid="cb9f5741-bc11-4b37-9974-0091b4ba2dfa"/>
-				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="182" y="11" width="100" height="20" uuid="f7be0673-eb4e-4ee4-b3d3-1869717a0091"/>
-				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="205" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
@@ -64,15 +52,6 @@
 		<band height="54" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
-			<textField>
-				<reportElement x="322" y="22" width="218" height="20" uuid="e1071044-ba16-4bdc-9369-76725fb8f1e6"/>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="272" y="22" width="50" height="20" uuid="38067397-63d9-4d2e-a37f-917c3ef882c6"/>
-				<text><![CDATA[fecha:]]></text>
-			</staticText>
-		</band>
+		<band height="42" splitType="Stretch"/>
 	</summary>
 </jasperReport>

@@ -45,14 +45,6 @@ public class FrmContratos implements Serializable{
 		per.setFecha(String.valueOf(cal.getTime()));
 		personas.add(per);
 		
-		per = new Contratos();
-		per.setNombres("Walter");
-		per.setApellidos("Ramirez");
-		cal = Calendar.getInstance();
-		cal.set(1990, 5, 21);
-		per.setFecha(String.valueOf(cal.getTime()));
-		personas.add(per);
-		
 		return personas;
 	}
 
@@ -60,7 +52,7 @@ public class FrmContratos implements Serializable{
         this.personas = personas;
     }
     
-        public void verPDF(ActionEvent actionEvent) throws Exception{
+        public void verPDF() throws Exception{
                 Map<String,Object> parametros= new HashMap<String,Object>();
 		parametros.put("txtUsuario", "Cacheton");
             
@@ -79,7 +71,7 @@ public class FrmContratos implements Serializable{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
     
-    	public void exportarPDF(ActionEvent actionEvent) throws JRException, IOException{
+    	public void exportarPDF() throws JRException, IOException{
 		Map<String,Object> parametros= new HashMap<String,Object>();
 		parametros.put("txtUsuario", "Cacheton");
 		
@@ -87,7 +79,7 @@ public class FrmContratos implements Serializable{
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, new JRBeanCollectionDataSource(this.getPersonas()));
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.pdf");
+		response.addHeader("Content-disposition","attachment; filename=contrato-sis_prestamos.pdf");
 		ServletOutputStream stream = response.getOutputStream();
 		
 		JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
@@ -97,7 +89,7 @@ public class FrmContratos implements Serializable{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 	
-	public void exportarExcel(ActionEvent actionEvent) throws JRException, IOException{
+	public void exportarExcel() throws JRException, IOException{
 		Map<String,Object> parametros= new HashMap<String,Object>();
 		parametros.put("txtUsuario", "Cacheton");
 		
@@ -105,7 +97,7 @@ public class FrmContratos implements Serializable{
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, new JRBeanCollectionDataSource(this.getPersonas()));
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.xlsx");
+		response.addHeader("Content-disposition","attachment; filename=contrato-sis_prestamos.xlsx");
 		ServletOutputStream stream = response.getOutputStream();
 		
 		JRXlsExporter exporter = new JRXlsExporter();
@@ -118,7 +110,7 @@ public class FrmContratos implements Serializable{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 	
-	public void exportarPPT(ActionEvent actionEvent) throws JRException, IOException{
+	public void exportarPPT() throws JRException, IOException{
 		Map<String,Object> parametros= new HashMap<String,Object>();
 		parametros.put("txtUsuario", "Cacheton");
 		
@@ -126,7 +118,7 @@ public class FrmContratos implements Serializable{
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, new JRBeanCollectionDataSource(this.getPersonas()));
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.ppt");
+		response.addHeader("Content-disposition","attachment; filename=contrato-sis_prestamos.ppt");
 		ServletOutputStream stream = response.getOutputStream();
 		
 		JRPptxExporter exporter = new JRPptxExporter();
@@ -139,7 +131,7 @@ public class FrmContratos implements Serializable{
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 	
-	public void exportarDOC(ActionEvent actionEvent) throws JRException, IOException{
+	public void exportarDOC() throws JRException, IOException{
 		Map<String,Object> parametros= new HashMap<String,Object>();
 		parametros.put("txtUsuario", "Cacheton");
 		
@@ -147,7 +139,7 @@ public class FrmContratos implements Serializable{
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(),parametros, new JRBeanCollectionDataSource(this.getPersonas()));
 		
 		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.addHeader("Content-disposition","attachment; filename=jsfReporte.doc");
+		response.addHeader("Content-disposition","attachment; filename=contrato-sis_prestamos.doc");
 		ServletOutputStream stream = response.getOutputStream();
 		
 		JRDocxExporter exporter = new JRDocxExporter();
