@@ -5,6 +5,9 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
     <h:head>
         <title>Configuracion del Sistema</title>
     </h:head>
@@ -27,15 +30,16 @@
                         <p:fieldset  legend="Opciones" style="width: 60%; margin: 0 auto; margin-top: 1%;">
                             <h:panelGrid columns="2" style="background-color:  transparent; margin: 0 auto; font-size: 20px;">
                                 <p:outputLabel for="interesMensual" value="Interes Mensual:" />
-                                <p:inputNumber required="true" id="interesMensual" value="#{frmParametro.interesMensual}"  title="Tasa Interes Mensual" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
+                                <p:inputNumber required="true" id="interesMensual" disabled="#{(user.getRol()!='a')?'true':'false'}" value="#{frmParametro.interesMensual}"  title="Tasa Interes Mensual" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
                                 <p:outputLabel value="Interes Diario:" for="interesDiario" />
-                                <p:inputNumber required="true" id="interesDiario" value="#{frmParametro.interesDiario}"  title="Tasa Interes Diario" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
+                                <p:inputNumber required="true" id="interesDiario" disabled="#{(user.getRol()!='a')?'true':'false'}" value="#{frmParametro.interesDiario}"  title="Tasa Interes Diario" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
                                 <p:outputLabel value="Tasa de Mora:" for="mora" />
-                                <p:inputNumber required="true" id="mora" value="#{frmParametro.mora}" title="Tasa de Mora" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
+                                <p:inputNumber required="true" id="mora" disabled="#{(user.getRol()!='a')?'true':'false'}" value="#{frmParametro.mora}" title="Tasa de Mora" decimalSeparator="." thousandSeparator="," decimalPlaces="4" size="8" symbol="%" symbolPosition="s"/>
                             </h:panelGrid>
                             <p:commandButton  value="Guardar Configuracion"  
                                               update="@all" 
-                                              icon="ui-icon-disk"                                               
+                                              icon="ui-icon-disk"       
+                                              rendered="#{(user.getRol()=='a')?'true':'false'}"
                                               style="margin: 10px; margin-left: 5%;"
                                               actionListener="#{frmParametro.guardarConfiguracion()}"
                                               />
@@ -49,5 +53,6 @@
         </ui:composition>
 
     </h:body>
+    </f:view>
 </html>
 

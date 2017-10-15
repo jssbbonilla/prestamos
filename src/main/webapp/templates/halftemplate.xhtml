@@ -9,10 +9,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
         <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
+
         <title>Sistema Prestamos</title>
     </h:head>
 
-    <h:body>
+    <h:body  >
+
 
         <div id="top">
             <ui:insert name="top">
@@ -22,18 +24,20 @@
                         <div class="top-bar">
                             <nav id="menu-nav" class="linkEffects linkHoverEffect_12 nav-cont">
                                 <ul>
-                                    <a><p:link id="url1" class="scroll"  value="Ir al sistema"></p:link></a> 
+                                    <a><p:link id="url1" class="scroll" outcome="clientes.xhtml" value="Regresas al sistema"></p:link></a> 
+                                    <a><p:link id="url2" class="scroll" outcome="usuarios.xhtml" value="Ad. Usuarios"></p:link></a> 
+                                    <a><p:link id="url3" class="scroll" outcome="bitacora.xhtml" value="Bitacora"></p:link></a> 
 
 
-                                    <p:splitButton value="Usuario" actionListener="#{buttonView.save}" update="messages" icon="fa fa-user-circle-o" >
-                                        <p:menuitem value="Ver Perfil" actionListener="#{buttonView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w" />
-                                        <p:menuitem value="Salir" actionListener="#{buttonView.delete}" ajax="false" icon="ui-icon-close" />
+                                    <p:splitButton value="#{user.getLogin()}" actionListener="#{buttonView.save}"  icon="fa fa-user-circle-o" >
+
+                                        <p:menuitem value="Salir" actionListener="#{frmUsuarios.logout()}" ajax="false" icon="ui-icon-close" />
                                         <p:separator />
                                     </p:splitButton>
 
                                 </ul>
                             </nav>  
-                            <h2 class="tituloheader"><i ></i> Administracion de Usuarios - Sistema de Prestamos <i  ></i></h2>
+                            <h2 class="tituloheader"><i ></i> Administración <i  ></i></h2>
 
 
                         </div>

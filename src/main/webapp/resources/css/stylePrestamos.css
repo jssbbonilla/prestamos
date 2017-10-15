@@ -1,7 +1,11 @@
+
+
+
 body
 { 
     margin: 0;
-    padding: 0;
+  margin-bottom: 40px;
+ 
     background: #eee;
 }
 
@@ -506,7 +510,8 @@ nav.linkEffects.linkHoverEffect_12 {
 
 /*-- footer --*/
 .mandarabajo{
-   position: absolute;
+    position: absolute;
+  bottom: 0;
     width: 100%;
 }
 

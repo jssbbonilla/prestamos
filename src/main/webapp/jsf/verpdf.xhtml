@@ -10,11 +10,11 @@
 <body> 
 	<h1>JSF + Jasper Reports Exports</h1>
 	<h:form>
-            <h:commandButton value="Exportar PDF" actionListener="#{frmContratos.exportarPDF()}"/>
-		<h:commandButton value="Ver PDF" actionListener="#{frmContratos.verPDF()}"/>
-                <h:commandButton value="Exportar Excel" actionListener="#{frmContratos.exportarExcel()}"/>
-		<h:commandButton value="Exportar DOC" actionListener="#{frmContratos.exportarDOC()}"/>
-		<h:commandButton value="Exportar PPT" actionListener="#{frmContratos.exportarPPT()}"/>		
+            <h:commandButton value="Exportar PDF" actionListener="#{frmContratos.exportarPDF(actionEvent)}"/>
+		<h:commandButton value="Ver PDF" actionListener="#{frmContratos.verPDF(actionEvent)}"/>
+                <h:commandButton value="Exportar Excel" actionListener="#{frmContratos.exportarExcel(actionEvent)}"/>
+		<h:commandButton value="Exportar DOC" actionListener="#{frmContratos.exportarDOC(actionEvent)}"/>
+		<h:commandButton value="Exportar PPT" actionListener="#{frmContratos.exportarPPT(actionEvent)}"/>		
 	</h:form>
 </body> 
 </html>

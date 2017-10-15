@@ -5,6 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
     <h:head>
         <title>Historial del Sistema</title>
     </h:head>
@@ -12,9 +15,9 @@
 
     <h:body>
 
-        <ui:composition template="../templates/halftemplate.xhtml">
+        <ui:composition template="../templates/halftemplate.xhtml" >
             <ui:define name="content">
-
+                
                 <h:form id="frm-iniciocliente">
                     <h:panelGrid columns="5" style="background-color:  transparent; margin: 1.5%; margin-left: 5%">
                         <p:outputLabel  value="Filtrar" />
@@ -26,7 +29,7 @@
                 <div >
                     <f:view>
                         <h:form >
-                            <p:dataTable value="#{frmClientes.lcliente}" id="tb-clientes" class="tableclass"
+                            <p:dataTable value="#{frmBitacora.lbitacora}" id="tb-clientes" class="tableclass"
                                          var="item"     
                                          paginator="true"
                                          rows="25"
@@ -34,41 +37,34 @@
                                          paginatorPosition="bottom"
                                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                          selectionMode="single"
-                                         rowKey="#{item.dui}"
-                                         selection="#{frmClientes.scliente}"
+                                         rowKey="#{item.id_usuario}"
+                                         selection="#{frmBitacora.sbitacora}"
                                          >
-                                <p:ajax event="rowSelect" listener="#{frmClientes.cambiarSeleccion}"/>
+                                <p:ajax event="rowSelect" />
                                 <p:column headerText="Registro" class="colum-id">
                                     <f:facet name="header">
                                         <h:outputText value="Registro"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.dui}"/>
+                                    <h:outputText value="#{item.id_bitacora}"/>
                                 </p:column >
                                 
                                 <p:column headerText="Usuario">
                                     <f:facet name="header">
                                         <h:outputText value="Usuario"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.nombre}"/>
+                                    <h:outputText value="#{item.id_usuario}"/>
                                 </p:column >
-                              
+                                <p:column headerText="Accíon" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Acción"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.accion}"/>
+                                </p:column>
                                 <p:column headerText="Fecha" >
                                     <f:facet name="header">
                                         <h:outputText value="Fecha"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.fechaNacimiento}"/>
-                                </p:column>
-                                <p:column headerText="Tipo Transacción" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Tipo Transacción"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.direcion}"/>
-                                </p:column>
-                                <p:column headerText="Cliente" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Cliente"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.apellido}"/>
+                                    <h:outputText value="#{item.fecha}"/>
                                 </p:column>
                                 <p:column style="width: 70px">
                                     <f:facet name="header">
@@ -77,7 +73,6 @@
                                     <p:button id="btn-info" 
                                               icon="fa fa-fw fa-info" 
                                               class="btn-detalle"
-                                              outcome="clientesdetalles.xhtml?dui=#{item.dui}"
                                               title="Detalles"
                                               />
                                 </p:column>
@@ -99,5 +94,6 @@
         </ui:composition>
 
     </h:body>
+    </f:view>
 </html>
 

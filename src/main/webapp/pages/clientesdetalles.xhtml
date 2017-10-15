@@ -5,6 +5,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
     <h:head>
         <f:metadata>
             <f:viewParam name="dui" value="#{frmclientedetalle.duiParam}"/>
@@ -310,5 +313,6 @@
         </ui:composition>
 
     </h:body>
+    </f:view>
 </html>
 

@@ -12,7 +12,7 @@ public class Cliente implements Serializable {
     public String apellido;
     public char sexo;
     public String direcion;
-     private List<Documento> documentos;
+    private List<Documento> documentos;
     public String telefono;
     public Date fechaNacimiento;
     public String observacion;

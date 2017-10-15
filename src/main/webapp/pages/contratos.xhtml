@@ -4,8 +4,10 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      >
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <f:view>
+    <f:event type="preRenderView"
+             listener="#{frmUsuarios.initialize}" />
     <h:head>
         <title>Contratos</title>
         <link href="../resources/css/styleContratos.css" rel="stylesheet" type="text/css" media="all" />
@@ -21,8 +23,8 @@
             <p:menu toggleable="true" class="menucontrato">
                 <p:submenu label="Contratos PDF" style="background: #c2dfef">
                     <p:menuitem value="Nuevo" actionListener="#{menuView.save}" update="messages" icon="ui-icon-document" />
-                    <p:menuitem ajax="false" value="Imprimir" actionListener="#{frmContratos.verPDF()}" update="messages" icon="ui-icon-print" />
-                    <p:menuitem ajax="false" value="Descargar PDF" actionListener="#{frmContratos.exportarPDF()}" update="messages" icon="ui-icon-disk" />
+                    <p:menuitem value="Imprimir" actionListener="#{menuView.save}" update="messages" icon="ui-icon-print" />
+                    <p:menuitem value="Descargar PDF" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
                     <p:menuitem value="Actualizar" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
                     <p:menuitem value="Eliminar" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
                 </p:submenu>
@@ -104,24 +106,19 @@
                                                  class="btn-visualizar" 
                                                  value="Visualizar"
                                                  style="margin: 3%; margin-left: 15%;"
-                                                 actionListener="#{frmContratos.verPDF()}"
-                                                 ajax="false"
+                                                 onclick="PF('Nprestamo').show();"
                                                 >        
                                 </p:commandButton>
                                 <p:commandButton id="btn-imprimir" icon="ui-icon-print"  
                                                  class="btn-imprimir" 
                                                  value="Imprimir"
                                                  style="margin: 3%; margin-left: 15%; background: #2ecc71; border: none; "
-                                                 actionListener="#{frmContratos.verPDF()}"
-                                                 ajax="false"
                                                 >        
                                 </p:commandButton>
                                 <p:commandButton id="btn-guardar" icon="ui-icon-circle-plus"  
                                                  class="btn-guardarcont" 
                                                  value="Guardar"
                                                  style="margin: 3%; margin-left: 15%; background: #F62A00; border: none;"
-                                                 actionListener="#{frmContratos.exportarPDF()}"
-                                                 ajax="false"
                                                 >        
                                 </p:commandButton>
                             </h:panelGrid>
@@ -214,7 +211,31 @@
             
         </h:form>
         
-        
+        <h:form>
+            <p:dialog  modal="false" 
+                               appendTo="@(body)" 
+                               style="background-color:#EFEDEF; width: 80%;" 
+                               showEffect="blind" 
+                               hideEffect="blind" 
+                               widgetVar="Nprestamo" 
+                               draggable="false" 
+                               closeOnEscape="true" 
+                               resizable="true">
+                               
+                        <p:ajax event="close" 
+
+                                immediate="true" global="false" />
+                        
+                        <h:form id="visual-pdf">
+                            <p:media value="/resources/pdf/prueba.pdf" width="100%" height="400px"/>
+                            
+                        </h:form>
+
+                       
+                    </p:dialog>
+        </h:form>
+
     </h:body>
+    </f:view>
 </html>
 

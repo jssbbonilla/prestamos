@@ -17,14 +17,16 @@
                 <h1 class="pulse animated infinite">Bievenido</h1>
 		
                 <h:form styleClass="form">
-                    <p:inputText  styleClass="input-user" type="text" placeholder="Usuario"/>
+                    <p:inputText  styleClass="input-user" type="text" placeholder="Usuario" value="#{frmUsuarios.usuario.login}"/>
                     
-                    <p:password  styleClass="input-user"  id="nonFeedback" value="#{passwordView.password1}" />
+                    <p:password  styleClass="input-user"  id="nonFeedback" value="#{frmUsuarios.usuario.clave}" />
 
-                    <p:button  id="login-button"  outcome="usuarios.xhtml" value="Entrar"></p:button>
+                    <p:commandButton  id="login-button"  actionListener="#{frmUsuarios.login()}" update="msg" value="Entrar"></p:commandButton>
 		</h:form>
 	</div>
         </div>
+                        <p:growl  id="msg" showDetail="true"/>
+
     </h:body>
 </html>
 
