@@ -106,20 +106,25 @@
                                                  class="btn-visualizar" 
                                                  value="Visualizar"
                                                  style="margin: 3%; margin-left: 15%;"
-                                                 onclick="PF('Nprestamo').show();"
+                                                 actionListener="#{frmContratos.verPDF()}"
+                                                 ajax="false"
                                                 >        
                                 </p:commandButton>
                                 <p:commandButton id="btn-imprimir" icon="ui-icon-print"  
                                                  class="btn-imprimir" 
                                                  value="Imprimir"
                                                  style="margin: 3%; margin-left: 15%; background: #2ecc71; border: none; "
+                                                 actionListener="#{frmContratos.verPDF()}"
+                                                 ajax="false"
                                                 >        
                                 </p:commandButton>
                                 <p:commandButton id="btn-guardar" icon="ui-icon-circle-plus"  
                                                  class="btn-guardarcont" 
                                                  value="Guardar"
                                                  style="margin: 3%; margin-left: 15%; background: #F62A00; border: none;"
-                                                >        
+                                                 actionListener="#{frmContratos.exportarPDF()}"
+                                                 ajax="false"
+                                                >         
                                 </p:commandButton>
                             </h:panelGrid>
                         </h:panelGrid>
