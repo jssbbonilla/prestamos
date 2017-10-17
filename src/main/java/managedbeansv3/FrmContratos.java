@@ -50,7 +50,7 @@ public class FrmContratos implements Serializable{
         
         Calendar cal = Calendar.getInstance();
 	cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
-        String fechaActual=String.valueOf(cal.getTime());
+        
         
         String primero=null;
         String segundo=null;
@@ -66,9 +66,10 @@ public class FrmContratos implements Serializable{
         String direccion= "Tes palos de coco avenida sur";
         String ciudad="Santa Ana";
         double monto=25660.33;
-        String fecha="12-05-2017";
+        String fechaInicio="12-05-2017";
         double interes= 0.5;
-        String fechaMaxima="15-05-2020";
+        String fechaFin="15-05-2020";
+        String fechaActual=String.valueOf(cal.getTime());
         
         
         datosPersonales="Conste por el presente contrato Privado de Préstamo de Dinero que celebramos "
@@ -79,12 +80,12 @@ public class FrmContratos implements Serializable{
         conveniente="Ambas partes llegan a los acuerdos siguientes:";
         
         primero= "LA PRESTAMISTA cede en calidad de PRESTAMO al PRESTATARIO la suma $"+monto+" a la "
-                + "Señor/a "+nombres+" "+apellidos+" La de fecha del "+fecha+".";
+                + "Señor/a "+nombres+" "+apellidos+" La de fecha del "+fechaInicio+".";
         segundo= "El prestatario acepta dicho dinero en calidad deprestamo y asegura haber recibido "
                 + "el total del dinero a la firma del presente documento, por lo que se compromete "
                 + "a devolver dicha suma de dinero, asimismo ambas partes acuerdan quedicho prestamo "
                 + "generará el interes de "+interes+" por ciento.";
-        tercero= "El capital prestado ha de devolverse en un plazo máximo de "+fechaMaxima+" años. No obstante"
+        tercero= "El capital prestado ha de devolverse en un plazo máximo de "+fechaFin+" años. No obstante"
                 + "el restatario podrá amortizar de forma anticipada el capital pendiente en "
                 + "cualquier momento. Los intereses se abonrán al efectuar el pago del capital en"
                 + "cada uno de los plazos.";

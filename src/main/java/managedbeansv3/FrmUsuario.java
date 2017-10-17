@@ -26,7 +26,7 @@ public class FrmUsuario implements Serializable {
 
       public void initialize( ComponentSystemEvent cse ) throws IOException {
       if ( FacesContext.getCurrentInstance().getExternalContext().getSessionMap().containsKey("user") ) {
-                    FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+                   
 
       }else{
               FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
