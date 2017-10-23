@@ -100,18 +100,6 @@
                                     </f:facet>
                                     <h:outputText value="#{item.fechaInicio}"/>
                                 </p:column>
-                                <p:column headerText="Fecha Fin" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Fecha Fin"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechaFin}"/>
-                                </p:column>
-                                <p:column headerText="Fecha Fin" >
-                                    <f:facet name="header">
-                                        <h:outputText value="Ultimo Pago"/>
-                                    </f:facet>
-                                    <h:outputText value="#{item.fechaUltimoPago}"/>
-                                </p:column>
                                 <p:column style="width: 110px">
                                     <f:facet name="header">
                                     </f:facet>
@@ -136,6 +124,17 @@
 
                                                      style="background-color:red; border: none"
                                                      />
+
+                                </p:column>
+                                <p:column style="width: 110px">
+                                    <f:facet name="header">
+                                    </f:facet>
+                                    
+                                    <p:button id="btn-contrato" 
+                                              value="Contrato"
+                                              title="Contrato" 
+                                              outcome="contratos.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
+                                              />
 
                                 </p:column>
                             </p:dataTable>

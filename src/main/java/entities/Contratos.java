@@ -6,9 +6,18 @@ import java.util.Date;
 
 public class Contratos implements Serializable{
     
-   private String nombres;
-   private String apellidos;
-   private String fecha;
+   String nombres;
+   String apellidos;
+   String dui;
+   String direccion;
+   String ciudad;
+   double monto;
+   double interes;
+   int cantidadCuotas;
+   Date fechaInicio;
+   Date fechaFin;
+   String fechaActual;
+   
    private String primero;
    private String segundo;
    private String tercero;
@@ -33,12 +42,68 @@ public class Contratos implements Serializable{
         this.apellidos = apellidos;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDui() {
+        return dui;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDui(String dui) {
+        this.dui = dui;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public double getInteres() {
+        return interes;
+    }
+
+    public void setInteres(double interes) {
+        this.interes = interes;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public String getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(String fechaActual) {
+        this.fechaActual = fechaActual;
     }
 
     public String getPrimero() {
@@ -96,7 +161,16 @@ public class Contratos implements Serializable{
     public void setConveniente(String conveniente) {
         this.conveniente = conveniente;
     }
+
+    public int getCantidadCuotas() {
+        return cantidadCuotas;
+    }
+
+    public void setCantidadCuotas(int cantidadCuotas) {
+        this.cantidadCuotas = cantidadCuotas;
+    }
+
     
-    
+
    
 }

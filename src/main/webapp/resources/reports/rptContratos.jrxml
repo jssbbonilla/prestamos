@@ -2,11 +2,11 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Contratos" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="115a914a-d080-4b92-946b-84994644149e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="217"/>
 	<parameter name="txtUsuario" class="java.lang.String"/>
 	<field name="nombres" class="java.lang.String"/>
 	<field name="apellidos" class="java.lang.String"/>
-	<field name="fecha" class="java.lang.String"/>
+	<field name="fechaActual" class="java.lang.String"/>
 	<field name="primero" class="java.lang.String"/>
 	<field name="segundo" class="java.lang.String"/>
 	<field name="tercero" class="java.lang.String"/>
@@ -170,7 +170,7 @@
 		<band height="25" splitType="Stretch">
 			<textField>
 				<reportElement x="369" y="5" width="186" height="20" uuid="aecaa04d-27a7-4a63-8032-0fbd45bb7d20"/>
-				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fechaActual}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="269" y="5" width="100" height="20" uuid="9a84900e-d797-4d8f-a87f-f1942830761a"/>

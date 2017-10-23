@@ -11,6 +11,11 @@
     <h:head>
         <title>Contratos</title>
         <link href="../resources/css/styleContratos.css" rel="stylesheet" type="text/css" media="all" />
+        <f:metadata>
+            <f:viewParam name="dui" value="#{frmContratos.duiParam}"/>
+            <f:viewParam name="id" value="#{frmContratos.prestamoParam}"/>
+}
+        </f:metadata>
     </h:head>
     <h:body>
 
@@ -50,21 +55,24 @@
 
 
                             <h:panelGrid columns="2" style="margin-left: 5%; margin-top: 2%;">
-                                <p:outputLabel  for="titulocont" value="Titulo del Contrato: "/>
-                                <p:inputText  id="titulocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="30" size="55" />
-                                <p:outputLabel  for="compania" value="Compañia "/>
-                                <p:inputText  id="compania"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
-                                <p:outputLabel  for="objetocont" value="Objeto del contrato: "/>
-                                <p:inputText  id="objetocont"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="250" size="55" />
-                                <p:outputLabel  for="contraparte" value="Contraparte: "/>
-                                <p:inputText  id="contraparte"  value="#{frmClientes.nuevoCliente.nombre}" maxlength="45" size="25" />
+                                <p:outputLabel  for="nombres" value="Nombres:"/>
+                                <p:inputText  id="nombres"  value="#{frmContratos.scontrato.nombres}" maxlength="30" size="55" />
+                                <p:outputLabel  for="apellidos" value="Apellidos: "/>
+                                <p:inputText  id="apellidos"  value="#{frmContratos.scontrato.apellidos}" maxlength="250" size="55" />
+                                <p:outputLabel  for="dui" value="DUI: "/>
+                                <p:inputText  id="dui"  value="#{frmContratos.scontrato.dui}" maxlength="250" size="25" />
+                                <p:outputLabel  for="ciudad" value="Ciudad: "/>
+                                <p:inputText  id="ciudad"  value="#{frmContratos.scontrato.ciudad}" maxlength="250" size="35" />
+                                <p:outputLabel  for="direccion" value="Direccion: "/>
+                                <p:inputTextarea  id="direccion"  value="#{frmContratos.scontrato.direccion}" cols="55" rows="4" />
+                                
                                 <p:outputLabel value="Fecha Inicio:" for="fechainicio" />
                                 <p:calendar id="fechainicio"
                                             mask="true"
                                             size="10"
                                             pattern="dd/MM/yyyy" 
                                             effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
-                                            value="#{frmPrestamos.sprestamo.fechaInicio}"
+                                            value="#{frmContratos.scontrato.fechaInicio}"
                                             title="Fecha Inicio"
                                             class="text-centrado"
                                             >
@@ -76,28 +84,18 @@
                                             size="10"
                                             pattern="dd/MM/yyyy" 
                                             effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
-                                            value="#{frmPrestamos.sprestamo.fechaFin}"
+                                            value="#{frmContratos.scontrato.fechaFin}"
                                             title="Fecha Fin" 
                                             class="text-centrado"
                                             >
                                     <f:convertDateTime pattern="dd/MM/yyyy" />
                                 </p:calendar>
-                                <p:outputLabel value="Fecha de Firma: " for="fechafirma" />
-                                <p:calendar id="fechafirma"
-                                            mask="true"
-                                            size="10"
-                                            pattern="dd/MM/yyyy" 
-                                            effect="blind" navigator="true" showOn="button" yearRange="-0:+100"
-                                            value="#{frmPrestamos.sprestamo.fechaFin}"
-                                            title="Fecha de Firma" 
-                                            class="text-centrado"
-                                            >
-                                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                                </p:calendar>
                                 <p:outputLabel value="Monto Aproximado" for="montoaprox" />
-                                <p:inputNumber id="montoaprox" value="#{frmPrestamos.sprestamo.valorCuota}" title="Monto aproximado de prestamo" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$"/>
-                                <p:outputLabel value="Comentarios: " for="comentarios" />
-                                <p:inputTextarea id="comentarios" value="#{frmPrestamos.sprestamo.observaciones}" title="Comentarios" cols="55" rows="4" />
+                                <p:inputNumber id="montoaprox" value="#{frmContratos.scontrato.monto}" title="Monto aproximado de prestamo" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$"/>
+                                <p:outputLabel value="Tasa de interes:" for="tasainteres" />
+                                <p:inputNumber id="tasainteres" value="#{frmContratos.scontrato.interes}" decimalSeparator="." thousandSeparator="," decimalPlaces="4" symbol="%" symbolPosition="s" size="15" title="tasa de Interes"/>
+                                <p:outputLabel value="N° de Cuotas:" for="cantidadcuotas" />
+                                <p:inputText id="cantidadcuotas" value="#{frmContratos.scontrato.cantidadCuotas}" title="N° de Cuotas" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
                             </h:panelGrid>
                             <h:panelGrid columns="1">
                                 <p:commandButton id="btn-visualizar" icon="ui-icon-script"  
