@@ -127,7 +127,6 @@ public class ControladorParametro extends Conexion implements Serializable{
         } catch (SQLException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         }
-        tasaMora=tasaMora/100;
         return tasaMora;
     }
    

@@ -49,7 +49,8 @@ public class FrmPrestamos implements Serializable{
     
     
     public FrmPrestamos() {
-        mostrarInteresPrestamo();
+        sprestamo.capitalizacion='M';
+        mostrarAlCargar();
     }
     
     public void activarBusqueda(){
@@ -62,7 +63,6 @@ public class FrmPrestamos implements Serializable{
             sprestamo.fechaInicio = metodo.utilDatetoSqlDate(sprestamo.getFechaInicio().toString());
             sprestamo.fechaFin = metodo.utilDatetoSqlDate(sprestamo.getFechaFin().toString());
             sprestamo.estado = 'A';
-            sprestamo.tasaMora=cparametro.obtenerTasaMora();
             
             cprestamo.agregar(sprestamo);
             nuevo();
@@ -121,6 +121,15 @@ public class FrmPrestamos implements Serializable{
           } catch (Exception e) {
               Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
           }
+     }
+     
+     public void mostrarAlCargar(){
+         try {
+             sprestamo.tasaMora=cparametro.obtenerTasaMora();
+             mostrarInteresPrestamo();
+         } catch (Exception e) {
+             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+         }
      }
      
     

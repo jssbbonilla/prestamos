@@ -157,7 +157,8 @@
                     </h:form>
 
 
-                    <p:dialog  modal="false" 
+                    <p:dialog  width="450"
+                               modal="false" 
                                appendTo="@(body)" 
                                style="background-color:#EFEDEF" 
                                showEffect="blind" hideEffect="blind" 
@@ -188,14 +189,17 @@
                                 <p:outputLabel value="Monto:" for="monto"/>
                                 <p:inputNumber id="monto" value="#{frmPrestamos.sprestamo.monto}" title="Monto" decimalSeparator="." thousandSeparator="," decimalPlaces="2" symbol="$"/>
                                 <p:outputLabel value="Interes:" for="tasainteres" />
-                                <p:outputLabel id="tasainteres" value="#{frmPrestamos.sprestamo.tasaInteres} %" title="Tasa Interes" />
+                                <p:inputNumber id="tasainteres" value="#{frmPrestamos.sprestamo.tasaInteres}" maxValue="100" decimalSeparator="." thousandSeparator="," decimalPlaces="4" symbol="%" symbolPosition="s" size="15" title="Interes del Prestamp" required="true"/>
                                 <p:outputLabel for="rd-capitalizacion" value="Capitalización:" />
                                 <p:selectOneRadio required="true" id="rd-capitalizacion" value="#{frmPrestamos.sprestamo.capitalizacion}">
                                     <f:selectItem itemLabel="Mensual" itemValue="M" />
                                     <f:selectItem itemLabel="Diaria" itemValue="D" />
+                                    <f:ajax listener="#{frmPrestamos.mostrarInteresPrestamo()}" render=":pago" />
                                 </p:selectOneRadio>
+                                <p:outputLabel value="Tasa Mora:" for="tasamora" />
+                                <p:inputNumber id="tasamora" value="#{frmPrestamos.sprestamo.tasaMora}" maxValue="100" decimalSeparator="." thousandSeparator="," decimalPlaces="4" symbol="%" symbolPosition="s" size="15" title="Interes de la Mora" />
                                 <p:outputLabel value="N° de Cuotas:" for="cantidadcuotas" />
-                                <p:inputText id="cantidadcuotas" value="#{frmPrestamos.sprestamo.cantidadCuotas}" title="N° de Cuotas" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
+                                <p:inputText id="cantidadcuotas" value="#{frmPrestamos.sprestamo.cantidadCuotas}" required="true" title="N° de Cuotas" onkeypress="if (event.which &lt; 48 || event.which &gt; 57) if (event.which != 8) return false;"/>
                             </h:panelGrid>
                             <p:commandButton id="btn-calcular" value="Calcular" icon="fa fa-fw fa-usd"
                                              class="btn-calcular"

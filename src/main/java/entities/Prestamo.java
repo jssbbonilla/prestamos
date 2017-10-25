@@ -430,6 +430,118 @@ public class Prestamo  implements Serializable{
         
         return mora;
     }
+    
+    public double CalcularInteresMensualesMejorado(){
+        double intereses=0;
+        double porcentajeInteres= tasaInteres/100;
+        double saldoActual = saldo;
+        Calendar cal = Calendar.getInstance();
+        double mul=0;
+        double mulmeses = 0;
+        int mesActual=0;
+        int mesPago=0;
+        int numMeses=0;
+        
+        if (this.capitalizacion == 'M') {
+            intereses=0;
+            porcentajeInteres= tasaInteres/100;
+            saldoActual = saldo;
+            mul=1;
+            numMeses=1;
+            
+        } else if (this.capitalizacion == 'D') {
+            try {
+                String verificacionCuota = "";
+                
+                verificacionCuota = ccuota.veficacionExisteCuota(String.valueOf(this.idPrestamo));
+                if (verificacionCuota.isEmpty() != true) {
+                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
+
+                Cuota datoscuotas = new Cuota();
+                datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
+                Date fechaPagada = datoscuotas.fecha;
+                
+                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                
+                double dias = Double.parseDouble(String.valueOf(d));
+                double meses = Double.parseDouble(String.valueOf(m));
+                
+                System.out.println("Numero de dias: "+dias);
+                System.out.print("Numero de meses: "+meses);
+                
+                if(meses == 0){
+                    meses = 30;
+                }
+                mul = (dias/meses);
+                
+                mesActual = (cal.get(cal.MONTH) + 1);
+                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
+                numMeses = mesActual - mesPago;
+                
+                }
+                
+                else{
+                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
+
+                Prestamo datosprestamo = new Prestamo();
+                ControladorPrestamo cprestamo = new ControladorPrestamo();
+                datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
+                Date fechaPagada = datosprestamo.fechaInicio;
+                
+                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                
+                double dias = Double.parseDouble(String.valueOf(d));
+                double meses = Double.parseDouble(String.valueOf(m));
+                
+                System.out.println("Numero de dias: "+dias);
+                System.out.print("Numero de meses: "+meses);
+                
+                
+                if(meses == 0){
+                    meses = 30;
+                }
+                mul = (dias/meses);
+                
+                mesActual = (cal.get(cal.MONTH) + 1);
+                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
+                numMeses = mesActual - mesPago;
+                
+                if(numMeses == 0){
+                    numMeses =1;
+                }
+                
+                }
+                
+                intereses = 0;
+                porcentajeInteres = (tasaInteres / 100)*(mul);
+                saldoActual = saldo;
+
+            } catch (Exception e) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }
+
+        try {
+            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
+            simbolo.setDecimalSeparator('.');
+            DecimalFormat decimales = new DecimalFormat("#.##", simbolo);
+            double resultado = (saldoActual)*(porcentajeInteres);
+            String covertidor = decimales.format(resultado);
+            intereses = Double.valueOf(covertidor)*(numMeses);
+            
+            
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+        
+        return intereses;
+    }
+    
+    
+    
+    
 
     /*----------------Validar Campos Prestamos-------------------------------------*/
     public boolean validarPrestamo() {
