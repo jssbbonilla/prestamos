@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.context.FacesContext;
@@ -275,7 +277,9 @@ public class FrmContratos implements Serializable{
     }
 
     public Prestamo getSprestamo() {
+        if((duiParam.isEmpty() || duiParam==null || prestamoParam.isEmpty() || prestamoParam ==null) !=true){
         this.sprestamo=cprestamo.Obtenerid(prestamoParam).get(0);
+        }
         return sprestamo;
     }
 
@@ -284,7 +288,9 @@ public class FrmContratos implements Serializable{
     }
 
     public Cliente getScliente() {
+        if((duiParam.isEmpty() || duiParam==null || prestamoParam.isEmpty() || prestamoParam ==null) !=true){
         this.scliente=ccliente.buscar(duiParam).get(0);
+        }
         return scliente;
     }
 
@@ -309,10 +315,14 @@ public class FrmContratos implements Serializable{
     }
         
     public Contratos getScontrato() {
-        if((duiParam.isEmpty() || duiParam==null || prestamoParam.isEmpty() || prestamoParam ==null) !=true){
+        try {
+          if((duiParam.isEmpty() || duiParam==null || prestamoParam.isEmpty() || prestamoParam ==null) !=true){
           mostrarDatos();  
         }
-        return scontrato;
+        } catch (Exception e) {
+             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+        return scontrato;  
     }
 
     public void setScontrato(Contratos scontrato) {

@@ -8,30 +8,30 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <head>
         <title>Sistema de Préstamos</title>
-       
+
         <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
         <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
         <link href="resources/css/index-css/styleServices.css" rel="stylesheet" type="text/css" media="all" />	
         <link href="../resources/css/stylePrestamos.css" rel="stylesheet" type="text/css" media="all" /> 
         <link href="../resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all"/>
-       
-      
+        <link href="../resources/css/template/footer-with-logo.css" rel="stylesheet" type="text/css" media="all"/>
+
         <!-- start-smoth-scrolling -->
     </head>
     <body style="  background: #eee">
-     
-<div id="top">
+
+        <div id="top">
             <ui:insert name="top">
- <h:form>
-                <div class="arriba" >
-                    <div class="top-bar">
-                         
-                        <h2 id="topic-header" class="tituloheader"></h2>
+                <h:form>
+                    <div class="arriba" >
+                        <div class="top-bar">
+
+                            <h2 id="topic-header" class="tituloheader"></h2>
 
 
+                        </div>
                     </div>
-                </div>
- </h:form>
+                </h:form>
             </ui:insert>
         </div>
 
@@ -57,7 +57,7 @@
                     <div class="col-md-3 w3ls ">
                         <div class=" ser-grid ser-grid1 ">
                             <div class=" hi-icon-effect-7 hi-icon-effect-7a">
-                                <i class="fa fa-user-circle-o hi-icon " onClick="location.href = '/sistema-prestamos_v3/faces/pages/clientes.xhtml'" > </i>
+                                <i class="glyphicon glyphicon-user hi-icon " onClick="location.href = '/sistema-prestamos_v3/faces/pages/clientes.xhtml'" > </i>
                             </div>
                             <h3>Clientes</h3>
                         </div>
@@ -73,7 +73,7 @@
                     <div class="col-md-3 w3ls ">
                         <div class=" ser-grid ser-grid3 ">
                             <div class=" hi-icon-effect-7 hi-icon-effect-7a">
-                                <i class="fa fa-cog hi-icon" onClick="location.href = '/sistema-prestamos_v3/faces/pages/historialpagos.xhtml'" > </i>
+                                <i class="glyphicon glyphicon-wrench hi-icon" onClick="location.href = '/sistema-prestamos_v3/faces/pages/configuracion.xhtml'" > </i>
                             </div>
                             <h3>Sistema</h3>
                         </div>
@@ -82,43 +82,61 @@
                 </div>
             </div>
         </div>
-        
+
         <!--footer-->
-                <footer class="mandarabajo">
-                    <div class="agileits-w3layouts-footer ">
-                        <div class="container">
-                            <div class="col-md-4 w3-agile-grid">
-                                <h6 id="topic-footer" class="titulo-footer">Acerca de Nosotros</h6>
-                                <h5 id="topic-footer2" class="oculto titulo-footer">Sistemas Prestamos</h5>
-                                <p id="text-footer">Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas</p>
-                                <div class="agileinfo-social-grids">
-                                    <ul>
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="clearfix"> </div>     
-                        </div>
+        <footer id="myFooter">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Aplicacion</h5>
+                        <ul>
+                            <li><a href="#">Incicio</a></li>
+                            <li><a href="#">Registrarse</a></li>
+                            <li><a href="#">Downloads</a></li>
+                        </ul>
                     </div>
-                    <div class="copyright">
-                        <div class="container">
-                            <p id="copy">© 2017 UES. Todos los derechos reservados | Diseñado por <a href="">Estudiante de Ingeniería.</a></p>
-                            <p id="copy2" class="oculto">© 2017 UES. Todos los derechos reservados</p>
-                        </div>
+                    <div class="col-sm-3">
+                        <h5>Sobre Nosotros</h5>
+                        <ul>
+                            <li><a href="#">Universidad de El Salvador</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Diseño de Sistemas II</a></li>
+                        </ul>
                     </div>
-                </footer>      
-                <!--//footer-->
-                
+                    <div class="col-sm-3">
+                        <h5>Soporte</h5>
+                        <ul>
+                            <li><a href="https://github.com/kkevin7">GitHub</a></li>
+                            <li><a href="#">Correo</a></li>
+                            <li><a href="#">Forums</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3 info">
+                        <h5>Informacion</h5>
+                        <p> Somos estudiantes de la Universidad Nacional de El Salvador dispuestos a realizar una una aplicacion web para la asignatura de Diseño de Sistemas II.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="second-bar">
+                <div class="container">
+                    <h3 class="logo"><h:link value="Sistema Prestamos"></h:link></h3>
+                    <div class="social-icons">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--//footer-->
+
         <!--//Servicios-->
 
-        
 
 
 
 
-       
+
+
     </body>
 </html>

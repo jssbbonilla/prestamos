@@ -27,11 +27,9 @@
 
             <p:menu toggleable="true" class="menucontrato">
                 <p:submenu label="Contratos PDF" style="background: #c2dfef">
-                    <p:menuitem value="Nuevo" actionListener="#{menuView.save}" update="messages" icon="ui-icon-document" />
-                    <p:menuitem value="Imprimir" actionListener="#{menuView.save}" update="messages" icon="ui-icon-print" />
-                    <p:menuitem value="Descargar PDF" actionListener="#{menuView.save}" update="messages" icon="ui-icon-disk" />
-                    <p:menuitem value="Actualizar" actionListener="#{menuView.update}" update="messages" icon="ui-icon-arrowrefresh-1-w"/>
-                    <p:menuitem value="Eliminar" actionListener="#{menuView.delete}" update="messages" ajax="false" icon="ui-icon-close"/>
+                    <p:menuitem value="Limpiar" actionListener="#{menuView.save}" ajax="false" update="messages" icon="ui-icon-document" />
+                    <p:menuitem value="Imprimir" actionListener="#{frmContratos.verPDF()}" ajax="false" update="messages" icon="ui-icon-print" />
+                    <p:menuitem value="Descargar PDF" actionListener="#{frmContratos.exportarPDF()}" ajax="false" update="messages" icon="ui-icon-disk" />
                 </p:submenu>
                 <p:submenu label="Menu principal" style="background: #c2dfef">
                     <p:menuitem value="Clientes" outcome="/faces/pages/clientes.xhtml" icon="ui-icon-home"/>
@@ -127,83 +125,74 @@
                     </p:tab>
                     <p:tab title="Contratos realizados">
                         <p:dataTable value="#{frmPrestamos.lprestamo}" id="tb-paso" class="tableclass"
-                                     var="item" 
-                                     paginator="true"
-                                     rows="10"
-                                     rowsPerPageTemplate="10,15,20"
-                                     paginatorPosition="bottom"
-                                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                     selectionMode="single"
-                                     rowKey="#{item.idPrestamo}"
-                                     selection="#{frmPrestamos.sprestamo}"
-                                     >
-                            <p:ajax  event="rowSelect" listener="#{frmPrestamos.cambiarSeleccion}"/>
-                            <p:column headerText="n-prestamos" class="colum-id">
-                                <f:facet name="header">
-                                    <h:outputText value="ID"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idPrestamo}"/>
-                            </p:column >
-                            <p:column headerText="DUI">
-                                <f:facet name="header">
-                                    <h:outputText value="Nombre"/>
-                                </f:facet>
-                                <h:outputText value="#{frmClientes.buscar(item.dui).nombre}"/>
-                            </p:column>
-                            <p:column headerText="Valor cuota" >
-                                <f:facet name="header">
-                                    <h:outputText value="Valor cuota"/>
-                                </f:facet>
-                                <h:outputText value="#{item.valorCuota}"/>
-                            </p:column>
-                            <p:column  headerText="Monto" >
-                                <f:facet name="header">
-                                    <h:outputText value="Monto"/>
-                                </f:facet>
-                                <h:outputText value="#{item.monto}"/>
-                            </p:column>
-                            <p:column  headerText="Interes" >
-                                <f:facet name="header">
-                                    <h:outputText value="Interes"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tasaInteres}"/>
-                            </p:column>
-                            <p:column headerText="Cuotas" >
-                                <f:facet name="header">
-                                    <h:outputText value="Cuotas"/>
-                                </f:facet>
-                                <h:outputText value="#{item.cantidadCuotas}"/>
-                            </p:column>
-                            <p:column headerText="Capitalizacion" >
-                                <f:facet name="header">
-                                    <h:outputText value="Capitalizacion"/>
-                                </f:facet>
-                                <h:outputText value="#{item.capitalizacion}"/>
-                            </p:column>
-                            <p:column  headerText="Fecha Inicio" >
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha Inicio"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fechaInicio}"/>
-                            </p:column>
-                            <p:column headerText="Fecha Fin" >
-                                <f:facet name="header">
-                                    <h:outputText value="Fecha Fin"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fechaFin}"/>
-                            </p:column>
-                            <p:column headerText="Fecha Fin" >
-                                <f:facet name="header">
-                                    <h:outputText value="Ultimo Pago"/>
-                                </f:facet>
-                                <h:outputText value="#{item.fechaUltimoPago}"/>
-                            </p:column>
-                            <p:column style="width: 110px">
-                                <f:facet name="header">
-                                </f:facet>
-                                
-                            </p:column>
-                        </p:dataTable>
+                                         var="item" 
+                                         paginator="true"
+                                         rows="10"
+                                         rowsPerPageTemplate="10,15,20"
+                                         paginatorPosition="bottom"
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         selectionMode="single"
+                                         rowKey="#{item.idPrestamo}"
+                                         selection="#{frmPrestamos.sprestamo}"
+                                         >
+                                <p:ajax  event="rowSelect" listener="#{frmPrestamos.cambiarSeleccion}"/>
+                                <p:column headerText="n-prestamos" class="colum-id">
+                                    <f:facet name="header">
+                                        <h:outputText value="ID"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idPrestamo}"/>
+                                </p:column >
+                                <p:column headerText="DUI">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{frmClientes.buscar(item.dui).nombre}"/>
+                                </p:column>
+                                <p:column headerText="Valor cuota" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Valor cuota"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.valorCuota}"/>
+                                </p:column>
+                                <p:column  headerText="Monto" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Monto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.monto}"/>
+                                </p:column>
+                                <p:column  headerText="Interes" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Interes"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tasaInteres}"/>
+                                </p:column>
+                                <p:column headerText="Cuotas" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Cuotas"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.cantidadCuotas}"/>
+                                </p:column>
+                                <p:column headerText="Capitalizacion" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Capitalizacion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.capitalizacion}"/>
+                                </p:column>
+                                <p:column  headerText="Fecha Inicio" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha Inicio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fechaInicio}"/>
+                                </p:column>
+                                <p:column>
+                                    <p:button id="btn-contrato" 
+                                              value="Contrato"
+                                              title="Contrato" 
+                                              outcome="contratos.xhtml?dui=#{item.dui}&amp;id=#{item.idPrestamo}"
+                                              />
+
+                                </p:column>
+                            </p:dataTable>
 
                     </p:tab>
                 </p:tabView>

@@ -102,7 +102,7 @@ public class MetodosShare {
         
         //años
         int d1 = anioHoy - anioAnt;
-        anio = 365 * (d1);
+        anio = 360 * (d1);
         //meses
         int d2 = mesHoy - mesAnt;
         mes = 30 * (d2);

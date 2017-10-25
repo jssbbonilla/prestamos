@@ -19,7 +19,6 @@ body
 .generalidad{
     margin: 0px;
     padding: 0px;
-    margin-left: 15%;
     width: 85%;
     height: 200px;
     background: #dddddd;
@@ -27,10 +26,8 @@ body
 
 .cont-tabla{
     background: white;    
-    width: 90%;
-    margin-left: 5%;
+    width: 100%;
     height: 80%;
-    margin-bottom: 10%;
     padding-bottom: 50px;
 }
 
@@ -38,9 +35,8 @@ body
     padding-top: 30px;
     width: 95%; 
     margin: auto; 
-    margin-bottom: 30px;
     min-width: 500px;
-    font-size:13px;
+    font-size: 12px;
     text-align:center;
 }
 

@@ -13,11 +13,11 @@
     </h:head>
     <h:body>
 
-        <ui:composition template="../templates/maintemplate.xhtml">
+        <ui:composition template="../templates/supertemplate.xhtml">
             <ui:define name="content">
 
                 <h:form id="frm-iniciocliente">
-                    <h:panelGrid columns="5" style="background-color:  transparent; margin: 1.5%; margin-left: 5%">
+                    <h:panelGrid columns="5" style="background-color:  transparent; margin-bottom: 1.5%; margin-left: 5%">
                         <h:graphicImage id="clienteIcon"  style="background-color:  transparent" class="icon" name="/images/contrato128x128.png"  height="50" width="60"/>
                         <p:outputLabel for="clienteIcon" value="PRESTAMOS" />
                         <p:inputText class="busqueda" type="text" value="#{frmPrestamos.busqueda}" />
@@ -100,7 +100,7 @@
                                     </f:facet>
                                     <h:outputText value="#{item.fechaInicio}"/>
                                 </p:column>
-                                <p:column style="width: 110px">
+                                <p:column style="width: 140px">
                                     <f:facet name="header">
                                     </f:facet>
                                     <p:button id="btn-pagar"

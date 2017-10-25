@@ -304,5 +304,19 @@ public class ControladorPrestamo extends Conexion implements Serializable {
         } finally {
             closeconexion();
         }}
+      
+      public double obtenerTasaMoraPrestamo(int idPrestamo){
+        double tasaMora=0;
+        ResultSet rs = null;
+        rs=getValores("SELECT tasa_mora FROM prestamos.prestamo WHERE id_prestamo='" + idPrestamo + "'");
+        try {
+            while(rs.next()){
+                tasaMora = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return tasaMora;
+    }
     
 }

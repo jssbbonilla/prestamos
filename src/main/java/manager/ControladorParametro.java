@@ -3,8 +3,12 @@ package manager;
 import entities.Cuota;
 import entities.Parametro;
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import managedbeansv3.MensajesFormularios;
 import services.Conexion;
 
@@ -110,6 +114,21 @@ public class ControladorParametro extends Conexion implements Serializable{
             ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
             mensaje.msgErrorAlEliminar();
         }
+    }
+    
+    public double obtenerTasaMora(){
+        double tasaMora=0;
+        ResultSet rs = null;
+        rs=getValores("SELECT valor FROM prestamos.parametro WHERE id_parametro='3'");
+        try {
+            while(rs.next()){
+                tasaMora = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        tasaMora=tasaMora/100;
+        return tasaMora;
     }
    
     

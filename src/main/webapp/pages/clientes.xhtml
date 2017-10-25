@@ -15,7 +15,7 @@
 
     <h:body>
 
-        <ui:composition template="../templates/maintemplate.xhtml">
+        <ui:composition template="../templates/supertemplate.xhtml">
             <ui:define name="content">
 
                 <h:form id="frm-iniciocliente">
@@ -77,7 +77,7 @@
                                     </f:facet>
                                     <h:outputText value="#{item.apellido}"/>
                                 </p:column>
-                                <p:column headerText="Sexo" style="width: 30px">
+                                <p:column headerText="Sexo" style="width: 40px">
                                     <f:facet name="header">
                                         <h:outputText value="Sexo"/>
                                     </f:facet>
@@ -101,7 +101,7 @@
                                     </f:facet>
                                     <h:outputText value="#{item.telefono}"/>
                                 </p:column>
-                                <p:column style="width: 70px">
+                                <p:column style="width: 100px">
                                     <f:facet name="header">
                                     </f:facet>
                                     
