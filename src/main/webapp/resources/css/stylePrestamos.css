@@ -183,7 +183,7 @@ body
 }
 
 .cuadro2-pago{
-    width: 35%;
+    width: 40%;
     /*background: #81BEF7;*/
     /*background: #A1D6E2;*/
     font-size: 14px;
@@ -216,7 +216,7 @@ body
 }
 
 .txt-datos-cliente{
-    height: 12px;
+    height: 25px;
 }
 
 .dialog-txt{

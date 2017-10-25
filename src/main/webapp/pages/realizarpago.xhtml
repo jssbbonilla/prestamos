@@ -22,17 +22,17 @@
 
 
                 <h:form id="frm-datos">
-                    <h:panelGrid columns="2" style="margin-left: 3%; margin-top: 1%; margin-bottom: 1%;">
+                    <h:panelGrid columns="2" style="margin-left: 3%; margin-bottom: 1%;">
                         <h:panelGrid id="panel-img" class="cuadro1-pago" columns="2" style="background: #F59970; border-radius: 5px;">
                             <h:graphicImage id="pagoIcon"  style="background-color:  transparent;" class="icon" name="/images/pago128x128.png"  height="100" width="100"/>
                             <p:outputLabel for="pagoIcon" value="REALIZAR PAGO" />
                         </h:panelGrid>
-                        <h:panelGrid columns="3" style="width: 50%;  margin: 0 auto; background: #AED6F1 ; border-radius: 5px;"> 
+                        <h:panelGrid columns="3" style="width: 70%; height: 150px; margin: 0 auto; background: #AED6F1 ; border-radius: 5px;"> 
                             <h:panelGrid columns="1">
                                 <h4 class="titulo-pago" style="margin: 0; margin: 1%;">Datos del Cliente</h4>
                             <h:panelGrid id="panel-detalle1" columns="2" class="cuadro2-pago">
                                 <p:outputLabel value="DUI:" for="dui" />
-                                <p:inputText id="dui" value="#{frmCuota.scliente.dui}" title="DUI" readonly="true" class="txt-datos-cliente"/>
+                                <p:inputText id="dui" value="#{frmCuota.scliente.dui}" title="DUI" readonly="true" class="txt-datos-cliente" />
                                 <p:outputLabel value="Nombre:" for="nombre" />
                                 <p:inputText id="nombre" value="#{frmCuota.scliente.nombre}" title="Nombre" readonly="true" class="txt-datos-cliente"/>
                                 <p:outputLabel value="Apellidos:" for="apellidos" />

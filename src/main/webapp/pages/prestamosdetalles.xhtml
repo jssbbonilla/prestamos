@@ -13,8 +13,8 @@
         <f:metadata>
             <f:viewParam name="dui" value="#{frmPrestamoDetalle.duiParam}"/>
             <f:viewParam name="id" value="#{frmPrestamoDetalle.prestamoParam}"/>
-}
         </f:metadata>
+        
     </h:head>
     <h:body>
 
@@ -22,7 +22,7 @@
             <ui:define name="content">
 
                 <h:form id="datos-prestamos">
-                    <div style="margin-top: 20px; margin-bottom: 20px">
+                    <div style="margin-bottom: 20px">
                         <h:panelGrid columns="3" style="width: 50%; background: #ACD0C0; margin: 0 auto; ">
 
                             <h:panelGrid columns="1"  class="cuadro1">
@@ -32,24 +32,24 @@
 
                             <h:panelGrid id="panel-detalle1" columns="2" class="cuadro2" style="width: 150px">
                                 <p:outputLabel value="ID Prestamos:" for="nprestamos" />
-                                <p:inputText id="nprestamos" value="#{frmPrestamoDetalle.sprestamo.idPrestamo}" title="NPrestamo" readonly="true" class="txt-datoscliente"/>
+                                <p:inputText id="nprestamos" value="#{frmPrestamoDetalle.sprestamo.idPrestamo}" title="NPrestamo" readonly="true" />
                                 <p:outputLabel value="DUI:" for="dui" />
-                                <p:inputText id="dui" value="#{frmPrestamoDetalle.sprestamo.dui}" title="DUI" readonly="true" class="txt-datoscliente" />
+                                <p:inputText id="dui" value="#{frmPrestamoDetalle.sprestamo.dui}" title="DUI" readonly="true" />
                                 <p:outputLabel value="Cliente:" for="cliente" />
-                                <p:inputText id="cliente" value="#{frmPrestamoDetalle.scliente.nombre}" title="Nombre" readonly="true" class="txt-datoscliente"/>
+                                <p:inputText id="cliente" value="#{frmPrestamoDetalle.scliente.nombre}" title="Nombre" readonly="true" />
                                 <p:outputLabel value="Apellido:" for="apellido" />
-                                <p:inputText id="apellido" value="#{frmPrestamoDetalle.scliente.apellido}" title="Apellido" readonly="true" class="txt-datoscliente"/>
+                                <p:inputText id="apellido" value="#{frmPrestamoDetalle.scliente.apellido}" title="Apellido" readonly="true" />
                             </h:panelGrid>
 
                             <h:panelGrid id="panel-detalle2" columns="2" class="cuadro2">
                                 <p:outputLabel value="Monto:" for="monto" />
-                                <p:inputNumber id="monto" value="#{frmPrestamoDetalle.sprestamo.monto}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Monto" readonly="true" symbol="$" class="txt-datoscliente"/>
+                                <p:inputNumber id="monto" value="#{frmPrestamoDetalle.sprestamo.monto}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Monto" readonly="true" symbol="$" />
                                 <p:outputLabel value="Saldo:" for="saldo" />
-                                <p:inputNumber id="saldo" value="#{frmPrestamoDetalle.sprestamo.saldo}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Saldo" readonly="true" symbol="$" class="txt-datoscliente"/>
+                                <p:inputNumber id="saldo" value="#{frmPrestamoDetalle.sprestamo.saldo}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Saldo" readonly="true" symbol="$" />
                                 <p:outputLabel value="N° Cuotas:" for="ncuotas" />
-                                <p:inputText id="ncuotas" value="#{frmPrestamoDetalle.sprestamo.cantidadCuotas}" title="N° Cuotas" readonly="true" class="txt-datoscliente"/>
+                                <p:inputText id="ncuotas" value="#{frmPrestamoDetalle.sprestamo.cantidadCuotas}" title="N° Cuotas" readonly="true" />
                                 <p:outputLabel value="Cuota($):" for="cuota" />
-                                <p:inputNumber id="cuota" value="#{frmPrestamoDetalle.sprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Valor de la Cuota" readonly="true" symbol="$" class="txt-datoscliente"/>
+                                <p:inputNumber id="cuota" value="#{frmPrestamoDetalle.sprestamo.valorCuota}" decimalSeparator="." thousandSeparator="," decimalPlaces="2" title="Valor de la Cuota" readonly="true" symbol="$"/>
                             </h:panelGrid>
 
                         </h:panelGrid>
