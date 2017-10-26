@@ -17,8 +17,8 @@ import manager.ControladorParametro;
 import manager.ControladorPrestamo;
 import manager.ErrorHandlerApp;
 
-public class Prestamo  implements Serializable{
-    
+public class Prestamo implements Serializable {
+
     public int idPrestamo;
     public String dui;
     public double monto;
@@ -33,16 +33,15 @@ public class Prestamo  implements Serializable{
     public String observaciones;
     public char capitalizacion;
     public double tasaMora;
-    
+
     Cliente ecliente = new Cliente();
     Cuota ecuota = new Cuota();
     ControladorCuota ccuota = new ControladorCuota();
     ControladorParametro cparametro = new ControladorParametro();
     ErrorHandlerApp ep = new ErrorHandlerApp();
     MetodosShare metodo = new MetodosShare();
-    
-    /*-----Getter and Setter ----------*/
 
+    /*-----Getter and Setter ----------*/
     public int getIdPrestamo() {
         return idPrestamo;
     }
@@ -162,7 +161,7 @@ public class Prestamo  implements Serializable{
     public void setEcuota(Cuota ecuota) {
         this.ecuota = ecuota;
     }
-    
+
     public ErrorHandlerApp getEp() {
         return ep;
     }
@@ -187,52 +186,40 @@ public class Prestamo  implements Serializable{
         this.tasaMora = tasaMora;
     }
 
-    
     /*------End Getter ans Setter ---------*/
-    
-    
-    
-    /*-----------Metodo para Calcular Cuota---------------------*/
-      public double calcularCuotaMensual(){
-          
-          Calendar cal = Calendar.getInstance();
-          double cuotaMensual = 0;
-          cuotaMensual = 0;
-          double interes = 0;
-          int conversion = 1;
-          int diasDelMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        
-        try {
-               if (this.capitalizacion == 'M') {
-                   conversion = 1;
-                   Parametro eparametro = new Parametro();
-                   eparametro = cparametro.buscarPrametro(String.valueOf(1)).get(0);
-                   tasaInteres = Double.parseDouble(eparametro.valor);
-               } else if (this.capitalizacion == 'D') {
-                   conversion = diasDelMes;
-                   Parametro eparametro = new Parametro();
-                   eparametro = cparametro.buscarPrametro(String.valueOf(2)).get(0);
-                   tasaInteres = Double.parseDouble(eparametro.valor);
-               }
-          } catch (Exception e) {
-              Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-          }
+ /*-----------Metodo para Calcular Cuota---------------------*/
+    public double calcularCuotaMensual() {
 
-
-        interes = tasaInteres/100;
-        double prestamo = monto;
-        double numeroCuotas = cantidadCuotas;
-          
+        Calendar cal = Calendar.getInstance();
+        double cuotaMensual = 0;
+        double interes = 0;
+        int conversion = 1;
+        int diasDelMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         try {
-            
-            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
-            simbolo.setDecimalSeparator('.');
-            DecimalFormat decimales = new DecimalFormat("#.##", simbolo);
-            double resultado = (prestamo) * ((interes / conversion) / (1 - (Math.pow(1 + (interes / conversion), (-cantidadCuotas)))));
-            String covertidor = decimales.format(resultado);
-            cuotaMensual = Double.valueOf(covertidor);
-            
+            if (this.capitalizacion == 'M') {
+                conversion = 1;
+                Parametro eparametro = new Parametro();
+                eparametro = cparametro.buscarPrametro(String.valueOf(1)).get(0);
+                tasaInteres = Double.parseDouble(eparametro.valor);
+
+                interes = tasaInteres / 100;
+                double prestamo = monto;
+
+                double resultado = (prestamo) * ((interes / conversion) / (1 - (Math.pow(1 + (interes / conversion), (-cantidadCuotas)))));
+                cuotaMensual = metodo.mascaraDosDigitos(resultado);
+
+            } else if (this.capitalizacion == 'D') {
+                conversion = diasDelMes;
+                Parametro eparametro = new Parametro();
+                eparametro = cparametro.buscarPrametro(String.valueOf(2)).get(0);
+                tasaInteres = Double.parseDouble(eparametro.valor);
+
+                interes = (tasaInteres / (100)) / (30 * cantidadCuotas);
+                double resultado = (this.monto) * (interes) / (1 - Math.pow(1 + interes, -cantidadCuotas));
+                cuotaMensual = metodo.mascaraDosDigitos(resultado);
+
+            }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
@@ -240,91 +227,89 @@ public class Prestamo  implements Serializable{
         return cuotaMensual;
     }
 
-    /*-------------------Crear Nueva Cuota---------------------------------*/  
-    public Cuota crearNuevaCuota(){
-       this.ecuota = new Cuota(); 
-            return this.ecuota; 
+    /*-------------------Crear Nueva Cuota---------------------------------*/
+    public Cuota crearNuevaCuota() {
+        this.ecuota = new Cuota();
+        return this.ecuota;
     }
-    
+
     /*-----------------Calcular Intereses Mensuales-------------------------------*/
-    public double CalcularInteresMensuales(){
-        double intereses=0;
-        double porcentajeInteres= tasaInteres/100;
+    public double CalcularInteresMensuales() {
+        double intereses = 0;
+        double porcentajeInteres = tasaInteres / 100;
         double saldoActual = saldo;
         Calendar cal = Calendar.getInstance();
-        double mul=0;
+        double mul = 0;
         double mulmeses = 0;
-        int mesActual=0;
-        int mesPago=0;
-        int numMeses=0;
-        
+        int mesActual = 0;
+        int mesPago = 0;
+        int numMeses = 0;
+
         if (this.capitalizacion == 'M') {
-            intereses=0;
-            porcentajeInteres= tasaInteres/100;
+            intereses = 0;
+            porcentajeInteres = tasaInteres / 100;
             saldoActual = saldo;
-            mul=1;
-            numMeses=1;
-            
+            mul = 1;
+            numMeses = 1;
+
         } else if (this.capitalizacion == 'D') {
             try {
                 String verificacionCuota = "";
-                
+
                 verificacionCuota = ccuota.veficacionExisteCuota(String.valueOf(this.idPrestamo));
                 if (verificacionCuota.isEmpty() != true) {
-                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
+                    String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
 
-                Cuota datoscuotas = new Cuota();
-                datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
-                Date fechaPagada = datoscuotas.fecha;
-                
-                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
-                
-                double dias = Double.parseDouble(String.valueOf(d));
-                double meses = Double.parseDouble(String.valueOf(m));
-                
-                if(meses == 0){
-                    meses = 30;
-                }
-                mul = (dias/meses);
-                
-                mesActual = (cal.get(cal.MONTH) + 1);
-                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
-                numMeses = mesActual - mesPago;
-                
-                }
-                
-                else{
-                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
+                    Cuota datoscuotas = new Cuota();
+                    datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
+                    Date fechaPagada = datoscuotas.fecha;
 
-                Prestamo datosprestamo = new Prestamo();
-                ControladorPrestamo cprestamo = new ControladorPrestamo();
-                datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
-                Date fechaPagada = datosprestamo.fechaInicio;
-                
-                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
-                
-                double dias = Double.parseDouble(String.valueOf(d));
-                double meses = Double.parseDouble(String.valueOf(m));
-                
-                if(meses == 0){
-                    meses = 30;
+                    int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                    int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
+
+                    double dias = Double.parseDouble(String.valueOf(d));
+                    double meses = Double.parseDouble(String.valueOf(m));
+
+                    if (meses == 0) {
+                        meses = 30;
+                    }
+                    mul = (dias / meses);
+
+                    mesActual = (cal.get(cal.MONTH) + 1);
+                    mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
+                    numMeses = mesActual - mesPago;
+
+                } else {
+                    String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
+
+                    Prestamo datosprestamo = new Prestamo();
+                    ControladorPrestamo cprestamo = new ControladorPrestamo();
+                    datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
+                    Date fechaPagada = datosprestamo.fechaInicio;
+
+                    int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                    int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
+
+                    double dias = Double.parseDouble(String.valueOf(d));
+                    double meses = Double.parseDouble(String.valueOf(m));
+
+                    if (meses == 0) {
+                        meses = 30;
+                    }
+                    mul = (dias / meses);
+
+                    mesActual = (cal.get(cal.MONTH) + 1);
+                    mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
+                    numMeses = mesActual - mesPago;
+
+                    if (numMeses == 0) {
+                        numMeses = 1;
+                    }
+
                 }
-                mul = (dias/meses);
-                
-                mesActual = (cal.get(cal.MONTH) + 1);
-                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
-                numMeses = mesActual - mesPago;
-                
-                if(numMeses == 0){
-                    numMeses =1;
-                }
-                
-                }
-                
+
                 intereses = 0;
-                porcentajeInteres = (tasaInteres / 100)*(mul);
+                porcentajeInteres = (tasaInteres / 100) * (mul);
                 saldoActual = saldo;
 
             } catch (Exception e) {
@@ -336,34 +321,33 @@ public class Prestamo  implements Serializable{
             DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
             simbolo.setDecimalSeparator('.');
             DecimalFormat decimales = new DecimalFormat("#.##", simbolo);
-            double resultado = (saldoActual)*(porcentajeInteres);
+            double resultado = (saldoActual) * (porcentajeInteres);
             String covertidor = decimales.format(resultado);
-            intereses = Double.valueOf(covertidor)*(numMeses);
-            
-            
+            intereses = Double.valueOf(covertidor) * (numMeses);
+
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return intereses;
     }
-    
-    public double calcularMora(){
-        double mora=0;
-        
-        int mesActual=0;
-        int mesPago=0;
-        int numMeses=0;
+
+    public double calcularMora() {
+        double mora = 0;
+
+        int mesActual = 0;
+        int mesPago = 0;
+        int numMeses = 0;
         Calendar cal = Calendar.getInstance();
         double valorPrestamo = 0;
-        double tasaMora=0;
-        double mesesMora=0;
-        
+        double tasaMora = 0;
+        double mesesMora = 0;
+
         try {
             String verificacionCuota = "";
             verificacionCuota = ccuota.veficacionExisteCuota(String.valueOf(this.idPrestamo));
             if (verificacionCuota.isEmpty() != true) {
-                
+
                 Cuota datoscuotas = new Cuota();
                 datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
                 Date fechaPagada = datoscuotas.fecha;
@@ -371,31 +355,29 @@ public class Prestamo  implements Serializable{
                 mesActual = (cal.get(cal.MONTH) + 1);
                 mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
                 numMeses = mesActual - mesPago;
-                
+
                 ControladorParametro cparametro = new ControladorParametro();
                 Parametro eparametro = new Parametro();
                 eparametro = cparametro.buscarPrametro(String.valueOf(3)).get(0);
-                
+
                 Prestamo datosprestamo = new Prestamo();
                 ControladorPrestamo cprestamo = new ControladorPrestamo();
                 datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
-                
-                if(numMeses>0){
-                                
-                                if(numMeses==1){
-                                    mesesMora=0;
-                                }
-                                else{
-                                    mesesMora=numMeses-1;
-                                }
-                            }
-                
+
+                if (numMeses > 0) {
+
+                    if (numMeses == 1) {
+                        mesesMora = 0;
+                    } else {
+                        mesesMora = numMeses - 1;
+                    }
+                }
+
                 valorPrestamo = datosprestamo.monto;
-                tasaMora  = Double.parseDouble(eparametro.valor);
-                mora = (valorPrestamo*(tasaMora/100))*(mesesMora);
-            }
-            else{
-                
+                tasaMora = Double.parseDouble(eparametro.valor);
+                mora = (valorPrestamo * (tasaMora / 100)) * (mesesMora);
+            } else {
+
                 Prestamo datosprestamo = new Prestamo();
                 ControladorPrestamo cprestamo = new ControladorPrestamo();
                 datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
@@ -404,144 +386,32 @@ public class Prestamo  implements Serializable{
                 mesActual = (cal.get(cal.MONTH) + 1);
                 mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
                 numMeses = mesActual - mesPago;
-                
+
                 ControladorParametro cparametro = new ControladorParametro();
                 Parametro eparametro = new Parametro();
                 eparametro = cparametro.buscarPrametro(String.valueOf(3)).get(0);
-                
-                if(numMeses>0){
-                                
-                                if(numMeses==1){
-                                    mesesMora=0;
-                                }
-                                else{
-                                    mesesMora=numMeses-1;
-                                }
-                            }
-                
+
+                if (numMeses > 0) {
+
+                    if (numMeses == 1) {
+                        mesesMora = 0;
+                    } else {
+                        mesesMora = numMeses - 1;
+                    }
+                }
+
                 valorPrestamo = datosprestamo.monto;
-                tasaMora  = Double.parseDouble(eparametro.valor);
-                mora = (valorPrestamo*(tasaMora/100))*(mesesMora);
-                
+                tasaMora = Double.parseDouble(eparametro.valor);
+                mora = (valorPrestamo * (tasaMora / 100)) * (mesesMora);
+
             }
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
-        
+
         return mora;
     }
-    
-    public double CalcularInteresMensualesMejorado(){
-        double intereses=0;
-        double porcentajeInteres= tasaInteres/100;
-        double saldoActual = saldo;
-        Calendar cal = Calendar.getInstance();
-        double mul=0;
-        double mulmeses = 0;
-        int mesActual=0;
-        int mesPago=0;
-        int numMeses=0;
-        
-        if (this.capitalizacion == 'M') {
-            intereses=0;
-            porcentajeInteres= tasaInteres/100;
-            saldoActual = saldo;
-            mul=1;
-            numMeses=1;
-            
-        } else if (this.capitalizacion == 'D') {
-            try {
-                String verificacionCuota = "";
-                
-                verificacionCuota = ccuota.veficacionExisteCuota(String.valueOf(this.idPrestamo));
-                if (verificacionCuota.isEmpty() != true) {
-                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
 
-                Cuota datoscuotas = new Cuota();
-                datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
-                Date fechaPagada = datoscuotas.fecha;
-                
-                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
-                
-                double dias = Double.parseDouble(String.valueOf(d));
-                double meses = Double.parseDouble(String.valueOf(m));
-                
-                System.out.println("Numero de dias: "+dias);
-                System.out.print("Numero de meses: "+meses);
-                
-                if(meses == 0){
-                    meses = 30;
-                }
-                mul = (dias/meses);
-                
-                mesActual = (cal.get(cal.MONTH) + 1);
-                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
-                numMeses = mesActual - mesPago;
-                
-                }
-                
-                else{
-                String fechaDiaHoy = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-" + cal.get(cal.DATE);
-
-                Prestamo datosprestamo = new Prestamo();
-                ControladorPrestamo cprestamo = new ControladorPrestamo();
-                datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
-                Date fechaPagada = datosprestamo.fechaInicio;
-                
-                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
-                
-                double dias = Double.parseDouble(String.valueOf(d));
-                double meses = Double.parseDouble(String.valueOf(m));
-                
-                System.out.println("Numero de dias: "+dias);
-                System.out.print("Numero de meses: "+meses);
-                
-                
-                if(meses == 0){
-                    meses = 30;
-                }
-                mul = (dias/meses);
-                
-                mesActual = (cal.get(cal.MONTH) + 1);
-                mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
-                numMeses = mesActual - mesPago;
-                
-                if(numMeses == 0){
-                    numMeses =1;
-                }
-                
-                }
-                
-                intereses = 0;
-                porcentajeInteres = (tasaInteres / 100)*(mul);
-                saldoActual = saldo;
-
-            } catch (Exception e) {
-                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-            }
-        }
-
-        try {
-            DecimalFormatSymbols simbolo = new DecimalFormatSymbols();
-            simbolo.setDecimalSeparator('.');
-            DecimalFormat decimales = new DecimalFormat("#.##", simbolo);
-            double resultado = (saldoActual)*(porcentajeInteres);
-            String covertidor = decimales.format(resultado);
-            intereses = Double.valueOf(covertidor)*(numMeses);
-            
-            
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-        }
-        
-        return intereses;
-    }
-    
-    
-    
-    
 
     /*----------------Validar Campos Prestamos-------------------------------------*/
     public boolean validarPrestamo() {
