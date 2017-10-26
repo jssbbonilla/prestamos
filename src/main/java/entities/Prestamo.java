@@ -277,8 +277,8 @@ public class Prestamo  implements Serializable{
                 datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
                 Date fechaPagada = datoscuotas.fecha;
                 
-                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
                 
                 double dias = Double.parseDouble(String.valueOf(d));
                 double meses = Double.parseDouble(String.valueOf(m));
@@ -302,8 +302,8 @@ public class Prestamo  implements Serializable{
                 datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
                 Date fechaPagada = datosprestamo.fechaInicio;
                 
-                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
                 
                 double dias = Double.parseDouble(String.valueOf(d));
                 double meses = Double.parseDouble(String.valueOf(m));
@@ -461,8 +461,8 @@ public class Prestamo  implements Serializable{
                 datoscuotas = ccuota.buscarCuota(String.valueOf(this.idPrestamo)).get(0);
                 Date fechaPagada = datoscuotas.fecha;
                 
-                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
                 
                 double dias = Double.parseDouble(String.valueOf(d));
                 double meses = Double.parseDouble(String.valueOf(m));
@@ -489,8 +489,8 @@ public class Prestamo  implements Serializable{
                 datosprestamo = cprestamo.buscarPrestamo(String.valueOf(this.idPrestamo)).get(0);
                 Date fechaPagada = datosprestamo.fechaInicio;
                 
-                int d = metodo.diferenciaDiasFechas(fechaPagada.toString(), fechaDiaHoy);
-                int m = metodo.diferenciaDiasDeMesTranscurrido(fechaPagada.toString(), fechaDiaHoy);
+                int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
+                int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
                 
                 double dias = Double.parseDouble(String.valueOf(d));
                 double meses = Double.parseDouble(String.valueOf(m));

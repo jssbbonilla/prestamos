@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * @author kevin
  */
 public class MetodosShare {
-    
+
     public String limpiarFormatoUtilDate(String fechaIngresada) throws ParseException {
         String fecha = fechaIngresada;
         DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
@@ -36,23 +36,23 @@ public class MetodosShare {
 
         return formatedDate;
     }
-    
-    public Date utilDatetoSqlDate(String fechaIngresada) throws ParseException{
+
+    public Date utilDatetoSqlDate(String fechaIngresada) throws ParseException {
         String fecha = fechaIngresada;
         DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss Z yyyy", Locale.US);
         java.util.Date utilDate = (java.util.Date) formatter.parse(fecha);
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        return  sqlDate;
+        return sqlDate;
     }
-    
-    public Date stringToSqlDate(String fechaIngresada) throws ParseException{
+
+    public Date stringToSqlDate(String fechaIngresada) throws ParseException {
         String fecha = fechaIngresada;
         DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         java.util.Date utilDate = (java.util.Date) formatter.parse(fecha);
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        return  sqlDate;
+        return sqlDate;
     }
-    
+
     public double mascaraDosDigitos(double valor) {
         double resultado = 0;
         double filtroDigitos = 0;
@@ -66,7 +66,7 @@ public class MetodosShare {
 
         return filtroDigitos;
     }
-    
+
     public int obtenerMesesFecha(String fechaIngresada) {
         int mes = 0;
 
@@ -81,12 +81,12 @@ public class MetodosShare {
         }
         return mes;
     }
-    
-    public int diferenciaDiasFechas(String fechaMenor, String fechaMayor){
-        
+
+    public int diferenciaDiasFechas(String fechaMenor, String fechaMayor) {
+
         String fechaAnterior = fechaMenor;
         String[] fechaAnt = fechaAnterior.split("-");
-        Integer anioAnt = Integer.parseInt(fechaAnt[0]);        
+        Integer anioAnt = Integer.parseInt(fechaAnt[0]);
         Integer mesAnt = Integer.parseInt(fechaAnt[1]);
         Integer diaAnt = Integer.parseInt(fechaAnt[2]);
 
@@ -95,11 +95,11 @@ public class MetodosShare {
         Integer anioHoy = Integer.parseInt(fechaHoy[0]);
         Integer mesHoy = Integer.parseInt(fechaHoy[1]);
         Integer diaHoy = Integer.parseInt(fechaHoy[2]);
-        
+
         int anio;
         int mes;
         int dia;
-        
+
         //años
         int d1 = anioHoy - anioAnt;
         anio = 360 * (d1);
@@ -110,15 +110,15 @@ public class MetodosShare {
         dia = diaHoy - diaAnt;
         int totaldias = dia + mes + anio;
         System.out.println("numero de dias: " + totaldias);
-        
+
         return totaldias;
     }
-    
-    public int diferenciaDiasDeMesTranscurrido(String fechaMenor, String fechaMayor){
-        
+
+    public int diferenciaDiasDeMesTranscurrido(String fechaMenor, String fechaMayor) {
+
         String fechaAnterior = fechaMenor;
         String[] fechaAnt = fechaAnterior.split("-");
-        Integer anioAnt = Integer.parseInt(fechaAnt[0]);        
+        Integer anioAnt = Integer.parseInt(fechaAnt[0]);
         Integer mesAnt = Integer.parseInt(fechaAnt[1]);
         Integer diaAnt = Integer.parseInt(fechaAnt[2]);
 
@@ -139,7 +139,47 @@ public class MetodosShare {
         int totalmeses = mes;
 
         System.out.println("numero de dias de meses: " + totalmeses);
-        
+
         return totalmeses;
+    }
+
+    public int encontrarMeses(String fechaIncial, String fechaFinal) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fInicial = dateFormat.parse(fechaIncial);
+            Date fFinal = dateFormat.parse(fechaFinal);
+
+            Calendar startCalendar = Calendar.getInstance();
+            startCalendar.setTime(fInicial);
+            Calendar endCalendar = Calendar.getInstance();
+            endCalendar.setTime(fFinal);
+
+            //Cálculo de meses para las fechas de inicio y finalización
+            int startMes = (startCalendar.get(Calendar.YEAR) * 12) + startCalendar.get(Calendar.MONTH);
+            int endMes = (endCalendar.get(Calendar.YEAR) * 12) + endCalendar.get(Calendar.MONTH);
+            //Diferencia en meses entre las dos fechas
+            int diffMonth = endMes - startMes;
+            System.out.println("Hay " + diffMonth + " meses de diferencia");
+            return diffMonth;
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            return 0;
+        }
+    }
+
+    public int encontrarDias(String fechaIncial, String fechaFinal) {
+        int totalDias = 0;
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fInicial = dateFormat.parse(fechaIncial);
+            Date fFinal = dateFormat.parse(fechaFinal);
+
+            totalDias = (int) ((fFinal.getTime() - fInicial.getTime()) / 86400000);
+
+            System.out.println("Hay " + totalDias + " dias de diferencia");
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+        return totalDias;
     }
 }

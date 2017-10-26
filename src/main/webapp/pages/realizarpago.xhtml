@@ -121,7 +121,10 @@
                                              class="btn-registrarpago"
                                              actionListener="#{frmCuota.crearPagoCuota()}"
                                              update=":frm-valores :frm-datos"
-                                             />
+                                             action="#{frmCuota.redirecionar(frmCuota.duiParam)}"
+                                             >
+                            <h:link outcome="historialpagos.xhtml" value="Historial de Pagos"/>
+                            </p:commandButton>
                         </h:panelGrid>
                     </h:panelGrid>
                 </h:form>

@@ -57,6 +57,10 @@ public class FrmCuota implements Serializable{
     public FrmCuota() {
     }
     
+    public String redirecionar(String dui) {
+    return "clientesdetalles.xhtml?dui="+dui+"&?faces-redirect=true";
+}
+    
     public void nuevo() {
         this.scuota = new Cuota();
     }
