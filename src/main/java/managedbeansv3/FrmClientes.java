@@ -25,6 +25,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.servlet.ServletContext;
 import manager.ControladorCliente;
+import manager.ControladorDocumentos;
 import org.apache.commons.io.FileUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
@@ -49,34 +50,35 @@ public class FrmClientes implements Serializable{
     private String imagenNuevo;
     MensajesFormularios mensaje = new MensajesFormularios(); //Mensajes de validacion
     MetodosShare metodo = new MetodosShare();
+    private ControladorDocumentos doc = new ControladorDocumentos();
     
-       Conexion cn= new Conexion();
-
+    Conexion cn= new Conexion();
     
     public void imagen(FileUploadEvent event) {
         UploadedFile file = event.getFile();
         String nombre = file.getFileName();
-        System.out.println(nombre);
-        
+        System.out.println(nombre);    
 
     }
     
     public void handleFileUpload(FileUploadEvent event) throws IOException{
+        int correlativo = doc.obtenerMaxId(nuevoCliente.getDui());
         if(event.getFile()!=null){
+           
             try{
                 cn.UID("INSERT INTO documento(dui, correlativo, nombre_archivo, archivo, descripcion)"
-                + " VALUES('" + nuevoCliente.dui+ "','" + 6 + "','" +
+                + " VALUES('" + nuevoCliente.getDui() + "','" + correlativo + "','" +
                 event.getFile().getFileName() + "','" +
                 event.getFile().getInputstream() + "','" + "IMAGEN"+"')");
+                nuevo();
             }catch(Exception e){
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
             }
         }else{
-           System.out.println("Archivo Vacio de Imagen o Documento");
+           System.out.println("El archivo o imagen se encuentra vacio");
        }
      
     }
-            
             
     public FrmClientes() {
     }
@@ -90,7 +92,6 @@ public class FrmClientes implements Serializable{
             if (nuevoCliente.Validar()) {
                 nuevoCliente.fechaNacimiento = metodo.utilDatetoSqlDate(nuevoCliente.getFechaNacimiento().toString());
                 ccliente.agregar(nuevoCliente);
-                nuevo();
             } else {
                 mensaje.msgFaltanCampos();
             }

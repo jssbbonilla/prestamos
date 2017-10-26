@@ -162,15 +162,8 @@
                                 update=":frm-clientes:tb-clientes" 
                                 immediate="true" global="false" />
                         <h:form>
-                            <h:panelGrid columns="2" >
-                                <h:panelGrid columns="1">
-                                    <p:outputLabel value="Foto de Cuenta"/>
-                                    <h:graphicImage id="clienteIcon"  style="background-color:  transparent" class="icon" name="#{frmClientes.imagenNuevo}"  height="130" width="130"/>
-                                    
-                                    <p:commandButton value="Subir" onclick="PF('agregarImagen').show();"/>
-                                 
-                                 
-                                </h:panelGrid>
+                            <h:panelGrid columns="1" >
+                                
                             <h:panelGrid id="grid" columns="2" style="text-align: left;" >
                                 <p:outputLabel  for="duip" value="Dui: " style="text-align: right;"/>
                                 <p:inputMask mask="99999999-9"  id="duip" value="#{frmClientes.nuevoCliente.dui}" maxlength="10" size="12" class="dialog-txt"/>
@@ -213,11 +206,14 @@
                                 <p:outputLabel for="observacionesp"   value="Observaciones:  " />
                                 <p:inputTextarea id="observacionesp" rows="5" cols="25" autoResize="true" value="#{frmClientes.nuevoCliente.observacion}"/>
 
-                                <p:commandButton  value="Registrar"  update="@all" icon="ui-icon-disk" actionListener="#{frmClientes.crearCliente()}" />
+                                <p:commandButton  value="Registrar" update="dialog" icon="ui-icon-disk" 
+                                                  actionListener="#{frmClientes.crearCliente()}" 
+                                                  onclick="PF('agregarImagen').show()" />
                                 <p:commandButton value="Cancelar" 
                                                  onclick="PF('agregarCliente').hide();"
                                                  icon="ui-icon-cancel" 
-                                                 type="button"/>
+                                                 type="button"
+                                                 />
                             </h:panelGrid>
                                 </h:panelGrid>
                         </h:form>
