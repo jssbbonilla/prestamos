@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -81,30 +80,34 @@ public class ControladorCliente extends Conexion implements Serializable {
                 pstmt.close();
 
             }
-
+            
             mensaje.msgCreadoExito();
         } catch (Exception e) {
             ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            
             mensaje.msgErrorAlCrear();
         }
 
     }
 
     // ###############################    ELIMINAR    ############################################
-    public void eliminar(Cliente cli) {
+    public boolean eliminar(Cliente cli) {
         try {
             if (cli == null || cli.dui == null || cli.dui.isEmpty()) {
                 mensaje.msgAdvertenciaAlEliminar();
                 System.err.println("Cliente invalido , verfique los datos");
+                return false;
             } else {
-                UID("DELETE FROM documento WHERE dui ='" + cli.getDui() + "'");
+              //  UID("DELETE FROM documento WHERE dui ='" + cli.getDui() + "'");
 
                 UID("DELETE FROM cliente WHERE dui ='" + cli.getDui() + "'");
                 mensaje.msgEliminacion();
+                return true;
             }
         } catch (Exception e) {
             mensaje.msgErrorAlEliminar();
             ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            return false;
         }
     }
 

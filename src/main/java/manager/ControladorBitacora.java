@@ -4,6 +4,8 @@ import entities.Bitacora;
 import entities.Cliente;
 import entities.Usuario;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
@@ -39,4 +41,28 @@ public class ControladorBitacora extends Conexion implements Serializable {
         }
 
     }
+     public void agregar(Bitacora bit) {
+
+        try{
+                PreparedStatement pstmt = conexion().prepareStatement("INSERT INTO bitacora (id_usuario,fecha,accion) VALUES (?,now(),?)");
+                pstmt.setInt(1, bit.getId_usuario());
+                pstmt.setString(2, bit.getAccion());
+             
+
+                String sql = pstmt.toString();
+                System.out.println("Succesful "+ sql);
+                UID(pstmt);
+                pstmt.close();
+                
+            
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            
+            mensaje.msgErrorAlCrear();
+        }
+
+    }
+    
+    
+    
 }

@@ -5,7 +5,9 @@
  */
 package managedbeansv3;
 
+import entities.Bitacora;
 import entities.Cliente;
+import entities.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -17,13 +19,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.servlet.ServletContext;
+import manager.ControladorBitacora;
 import manager.ControladorCliente;
 import org.apache.commons.io.FileUtils;
 import org.primefaces.event.FileUploadEvent;
@@ -36,8 +41,16 @@ import org.primefaces.event.SelectEvent;
 @Named(value = "frmClientes")
 @ViewScoped
 public class FrmClientes implements Serializable{
+    
+       private Usuario usuario = new Usuario();
+    private Bitacora bit = new Bitacora();
+    private ControladorBitacora cbit = new ControladorBitacora();
 
-    ControladorCliente ccliente = new ControladorCliente();
+    private ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+    private Map<String, Object> sessionMap = externalContext.getSessionMap();
+            Usuario sesion = (Usuario) sessionMap.get("user");
+
+       ControladorCliente ccliente = new ControladorCliente();
     DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
     private List<Cliente> lcliente = new ArrayList<Cliente>();
     private Cliente scliente = new Cliente();
@@ -76,12 +89,13 @@ public class FrmClientes implements Serializable{
         try {
             if (nuevoCliente.Validar()) {
                 nuevoCliente.fechaNacimiento = metodo.utilDatetoSqlDate(nuevoCliente.getFechaNacimiento().toString());
-                ccliente.agregar(nuevoCliente);
+                generarAccion("Se creo el cliente con dui :"+nuevoCliente.getDui());
+                ccliente.agregar(nuevoCliente);                 
                 nuevo();
-                  try{
-                     File fd = new File(realPath+"resources/images/","somefile.png");
-                fd.delete();
-                }catch(Exception e){}
+//                  try{
+//                     File fd = new File(realPath+"resources/images/","somefile.png");
+//                fd.delete();
+//                }catch(Exception e){}
             } else {
                 mensaje.msgFaltanCampos();
             }
@@ -91,10 +105,12 @@ public class FrmClientes implements Serializable{
     }
 
     public void eliminarCliente() throws Exception {
-        if (scliente.getDui().isEmpty() != true) {
-            ccliente.eliminar(scliente);
-            scliente = new Cliente();
-        }
+            if(ccliente.eliminar(scliente)){
+                generarAccion("Se elimino el cliente con el dui : "+scliente.getDui());
+                scliente = new Cliente();
+            }
+
+    
     }
 
     public void cambiarSeleccion(SelectEvent e) {
@@ -110,8 +126,15 @@ public class FrmClientes implements Serializable{
         return ccliente.buscar(esta).get(0);
     }
 
-   
-    
+     public void generarAccion(String accion) {
+
+        bit.setAccion(accion);
+        bit.setId_usuario(sesion.getId());
+        cbit.agregar(bit);
+        
+        
+    }
+
     /*-------------------------Getter and Setter----------------------------*/
     
     
