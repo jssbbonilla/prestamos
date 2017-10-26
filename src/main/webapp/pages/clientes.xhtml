@@ -225,41 +225,28 @@
                     <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"  />
 
                 </div>
-                 <p:dialog id="dialogI" 
-                          modal="false" 
-
-                          style="background-color:#EFEDEF; text-align: center" 
-                          showEffect="blind" hideEffect="blind" 
-                          widgetVar="agregarImagen"   
-                          header="Agregar Imagen"  
-                          draggable="false" 
-                          closeOnEscape="true" 
-                          appendTo="@(body)" 
-
-                          resizable="false">
-                    <p:ajax event="close" 
-
-
-                            immediate="true" global="false" 
-                            update=":dialog"/>
+                 <h:form>
+                    <h:panelGrid>
+                        <p:dialog id="imagen" 
+                              modal="false" 
+                              style="background-color:#EFEDEF; text-align: center" 
+                              showEffect="blind" hideEffect="blind" 
+                              widgetVar="agregarImagen"   
+                              header="Agregar Imagen"  
+                              draggable="false" 
+                              closeOnEscape="true" 
+                              appendTo="@(body)" 
+                              resizable="false">
+                        <p:fileUpload fileUploadListener="#{frmClientes.handleFileUpload}" 
+                                  mode="advanced" 
+                                  update="messages" 
+                                  sizeLimit="100000" 
+                                  fileLimit="3" 
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
                     
-                    <h:form id="subir" enctype="multipart/form-data">
-<br/>
-<p:fileUpload style="width: 500px" fileUploadListener="#{frmClientes.upload}" mode="advanced" dragDropSupport="false"
-               fileLimit="3" allowTypes="/(\.|\/)(jpg)$/" 
-               
-               />
- 
-   
-                        <br/>
-                     
-
-
-
-
-
-                    </h:form>
                 </p:dialog>
+                    </h:panelGrid>
+                </h:form>
                
             </ui:define>
         </ui:composition>

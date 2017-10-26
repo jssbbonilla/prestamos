@@ -28,6 +28,8 @@ import manager.ControladorCliente;
 import org.apache.commons.io.FileUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
+import services.Conexion;
 
 /**
  *
@@ -47,21 +49,32 @@ public class FrmClientes implements Serializable{
     private String imagenNuevo;
     MensajesFormularios mensaje = new MensajesFormularios(); //Mensajes de validacion
     MetodosShare metodo = new MetodosShare();
-    ServletContext ctx = (ServletContext) FacesContext.getCurrentInstance()
-            .getExternalContext().getContext();
-            String realPath = ctx.getRealPath("/");
     
+       Conexion cn= new Conexion();
+
     
-    public void upload(FileUploadEvent event) throws IOException{
-     if(event.getFile() != null) {
-            FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-            FacesContext.getCurrentInstance().addMessage(null, message);
+    public void imagen(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+        String nombre = file.getFileName();
+        System.out.println(nombre);
+        
 
-            File destFile= new File(realPath+"resources/images/","somefile.png");
-            
-            FileUtils.copyInputStreamToFile(event.getFile().getInputstream(), destFile);
-
+    }
+    
+    public void handleFileUpload(FileUploadEvent event) throws IOException{
+        if(event.getFile()!=null){
+            try{
+                cn.UID("INSERT INTO documento(dui, correlativo, nombre_archivo, archivo, descripcion)"
+                + " VALUES('" + nuevoCliente.dui+ "','" + 6 + "','" +
+                event.getFile().getFileName() + "','" +
+                event.getFile().getInputstream() + "','" + "IMAGEN"+"')");
+            }catch(Exception e){
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }else{
+           System.out.println("Archivo Vacio de Imagen o Documento");
        }
+     
     }
             
             
@@ -78,10 +91,6 @@ public class FrmClientes implements Serializable{
                 nuevoCliente.fechaNacimiento = metodo.utilDatetoSqlDate(nuevoCliente.getFechaNacimiento().toString());
                 ccliente.agregar(nuevoCliente);
                 nuevo();
-                  try{
-                     File fd = new File(realPath+"resources/images/","somefile.png");
-                fd.delete();
-                }catch(Exception e){}
             } else {
                 mensaje.msgFaltanCampos();
             }
@@ -188,30 +197,22 @@ public class FrmClientes implements Serializable{
         this.busquedaActiva = busquedaActiva;
     }
 
-    /**
-     * @return the imagenNuevo
-     */
     public String getImagenNuevo() {
-        File imgNuevo = new File(realPath+"resources/images/","somefile.png");
-        if(imgNuevo.exists()){
-            
-           
-        
-            return "/images/somefile.png";
-        
-        }else{
-        return "/images/hombre128x128.png";
-        }
-        
+        return imagenNuevo;
     }
-  
 
-    /**
-     * @param imagenNuevo the imagenNuevo to set
-     */
     public void setImagenNuevo(String imagenNuevo) {
         this.imagenNuevo = imagenNuevo;
     }
-    
 
+    public Conexion getCn() {
+        return cn;
+    }
+
+    public void setCn(Conexion cn) {
+        this.cn = cn;
+    }
+    
+    
+    
 }
