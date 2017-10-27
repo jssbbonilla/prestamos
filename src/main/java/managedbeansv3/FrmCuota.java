@@ -5,18 +5,24 @@
  */
 package managedbeansv3;
 
+import entities.Bitacora;
 import entities.Cliente;
 import entities.Cuota;
 import entities.Prestamo;
+import entities.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import manager.ControladorBitacora;
 import manager.ControladorCliente;
 import manager.ControladorCuota;
 import manager.ControladorPrestamo;
@@ -29,6 +35,15 @@ import org.primefaces.event.SelectEvent;
 @Named(value = "frmCuota")
 @ViewScoped
 public class FrmCuota implements Serializable{
+    
+    private Usuario usuario = new Usuario();
+    private Bitacora bit = new Bitacora();
+    private ControladorBitacora cbit = new ControladorBitacora();
+
+    private ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+    private Map<String, Object> sessionMap = externalContext.getSessionMap();
+           Usuario sesion = (Usuario) sessionMap.get("user");
+
     
     private String duiParam;
     private String idParam;
@@ -81,6 +96,7 @@ public class FrmCuota implements Serializable{
             try {
                 /*----------- Agregar la cuota -------------------*/
                 ccuota.agregarCuotaCalculada(scuota);
+                generarAccion("Registró un pago para el prestamo con id : ");
 
                 this.sprestamo.idPrestamo = idPrestamo;
                 this.sprestamo.saldo = this.scuota.saldoActualizado;
@@ -97,6 +113,7 @@ public class FrmCuota implements Serializable{
     public void eliminarCuota() throws Exception {
         if (scuota.getNumCuota() != 0) {
             ccuota.eliminar(scuota);
+            generarAccion("Eliminó una cuota para el prestamo con id ");
             scuota = new Cuota();
             mensaje.msgEliminacion();
         }
@@ -358,6 +375,14 @@ public class FrmCuota implements Serializable{
         
         
     }
+    
+     public void generarAccion(String accion) {
+
+        bit.setAccion(accion);
+        bit.setId_usuario(sesion.getId());
+        cbit.agregar(bit);
+    }
+
     
     
     /*-------------------- Getter and Setter -------------------------*/
