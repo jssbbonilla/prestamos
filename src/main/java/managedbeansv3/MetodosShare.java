@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package managedbeansv3;
 
 import java.text.DateFormat;
@@ -181,5 +177,37 @@ public class MetodosShare {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
         }
         return totalDias;
+    }
+    
+        public int encontrarMesesDiarios(String fechaIncial, String fechaFinal) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fInicial = dateFormat.parse(fechaIncial);
+            Date fFinal = dateFormat.parse(fechaFinal);
+
+            Calendar startCalendar = Calendar.getInstance();
+            startCalendar.setTime(fInicial);
+            Calendar endCalendar = Calendar.getInstance();
+            endCalendar.setTime(fFinal);
+
+            //Cálculo de meses para las fechas de inicio y finalización
+            int startMes = (startCalendar.get(Calendar.YEAR) * 12) + startCalendar.get(Calendar.MONTH);
+            int endMes = (endCalendar.get(Calendar.YEAR) * 12) + endCalendar.get(Calendar.MONTH);
+            //Diferencia en meses entre las dos fechas
+            int diffMonth = endMes - startMes;
+            
+            int diasDelMes = startCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+            int diasTranscurridos = encontrarDias(fechaIncial, fechaFinal);
+            if(diasDelMes >= diasTranscurridos){
+                diffMonth=0;
+            }
+            System.out.println("Hay " + diffMonth + " meses de diferencia");
+            
+            return diffMonth;
+            
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+            return 0;
+        }
     }
 }

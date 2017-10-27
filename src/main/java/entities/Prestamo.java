@@ -239,6 +239,7 @@ public class Prestamo implements Serializable {
         double porcentajeInteres = tasaInteres / 100;
         double saldoActual = saldo;
         Calendar cal = Calendar.getInstance();
+        int diasDelMes = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         double mul = 0;
         double mulmeses = 0;
         int mesActual = 0;
@@ -265,15 +266,17 @@ public class Prestamo implements Serializable {
                     Date fechaPagada = datoscuotas.fecha;
 
                     int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                    int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
+                    int m = metodo.encontrarMesesDiarios(fechaPagada.toString(), fechaDiaHoy);
 
                     double dias = Double.parseDouble(String.valueOf(d));
                     double meses = Double.parseDouble(String.valueOf(m));
 
                     if (meses == 0) {
-                        meses = 30;
+                        meses = diasDelMes;
+                        mul = (dias / (diasDelMes));
+                    }else{
+                        mul = (dias / (meses*diasDelMes));
                     }
-                    mul = (dias / meses);
 
                     mesActual = (cal.get(cal.MONTH) + 1);
                     mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
@@ -288,15 +291,17 @@ public class Prestamo implements Serializable {
                     Date fechaPagada = datosprestamo.fechaInicio;
 
                     int d = metodo.encontrarDias(fechaPagada.toString(), fechaDiaHoy);
-                    int m = metodo.encontrarMeses(fechaPagada.toString(), fechaDiaHoy);
+                    int m = metodo.encontrarMesesDiarios(fechaPagada.toString(), fechaDiaHoy);
 
                     double dias = Double.parseDouble(String.valueOf(d));
                     double meses = Double.parseDouble(String.valueOf(m));
 
                     if (meses == 0) {
-                        meses = 30;
+                        meses = diasDelMes;
+                        mul = (dias / (diasDelMes));
+                    }else{
+                        mul = (dias / (meses*diasDelMes));
                     }
-                    mul = (dias / meses);
 
                     mesActual = (cal.get(cal.MONTH) + 1);
                     mesPago = metodo.obtenerMesesFecha(fechaPagada.toString());
