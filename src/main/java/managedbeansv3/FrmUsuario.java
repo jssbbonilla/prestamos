@@ -71,6 +71,17 @@ public class FrmUsuario implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 
     }
+    
+    public void editar(){
+        try {
+
+                userman.editar(susario);
+                generarAccion("Se editó al usuario con el id: "+susario.getId());
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+        }
+    }
+       
 
     public void crearCliente() throws Exception {
         try {

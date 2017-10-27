@@ -39,8 +39,14 @@
 
                                     <h:panelGrid columns="2" >
 
-                                        <h:panelGrid id="gridtwo" columns="4" style="text-align: left;" >
+                                        <h:panelGrid id="gridtwo" columns="6" style="text-align: left;" >
+
+                                            <p:outputLabel for="idu" value="Id" />
+
+                                            <p:inputText  id="idu"  value="#{frmUsuarios.susario.id}"/>
+
                                             <p:outputLabel for="nombre" value="Nombre" />
+
 
                                             <p:inputText  id="nombre"  value="#{frmUsuarios.susario.nombre}" />
                                             <p:outputLabel for="apellido" value="Apellidos" />
@@ -52,7 +58,9 @@
                                             </p:selectOneMenu>
                                             <p:outputLabel for="usuario" value="Usuario: " />
                                             <p:inputText  id="usuario"  value="#{frmUsuarios.susario.login}" />
-                                            <p:commandButton  value="Realizar" icon="ui-icon-disk" onclick="PF('confirmrequired').show();" />
+                                            <p:outputLabel  value=" " />
+
+                                            <p:commandButton  value="Realizar" update=":table-users" icon="ui-icon-disk" actionListener="#{frmUsuarios.editar()}" />
 
 
                                         </h:panelGrid>
@@ -206,7 +214,7 @@
                             <p:panelGrid columns="2">
                                 <p:outputLabel value="Contraseña : "></p:outputLabel>
                                 <p:password id="nonFeedback" value="#{passwordView.password1}" />
-                                <p:commandButton  value="Confirmar"  update=":msgs" icon="ui-icon-disk" />
+                                <p:commandButton  value="Confirmar"  actionListener="#{frmUsuarios.editar()}" oncomplete="PF('agregarUsuario').hide();"  update=":msgs" icon="ui-icon-disk" />
                                 <p:outputLabel value=" "></p:outputLabel>
 
 

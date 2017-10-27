@@ -48,6 +48,29 @@ public class ControladorUsuario extends Conexion implements Serializable {
 
         
     }
+    public Usuario obtenerUsuario(int id_usuario) {
+        try {
+            Usuario usuario = new Usuario();
+            rst = getValores("SELECT  * FROM usuario WHERE id_usuario="+id_usuario);
+            while (rst.next()) {
+               
+                usuario.setApellido(rst.getString("apellidos"));
+                usuario.setNombre(rst.getString("nombres"));
+                usuario.setRol(rst.getString("rol").charAt(0));
+                usuario.setLogin(rst.getString("login"));
+                usuario.setId(rst.getInt("id_usuario"));
+                return usuario;
+            }
+         
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            return null;
+        } finally {
+            closeconexion();
+        }
+        return null;
+    }
+    
    
     public List<Usuario> obtener() {
         List<Usuario> clientes = new ArrayList<Usuario>();
@@ -73,6 +96,36 @@ public class ControladorUsuario extends Conexion implements Serializable {
 
     }
     
+    public void editar(Usuario usr) {
+        try {
+            if (usr == null) {
+                System.err.println("Usuario invalido , verfique los datos");
+
+            } else if(usr.equals(obtenerUsuario(usr.getId()))){
+                                System.err.println("Sin cambios");
+
+            }else{
+               PreparedStatement pstmt = conexion().prepareStatement("UPDATE prestamos.usuario SET login= ?, nombres= ?, apellidos= ?, rol= ? WHERE id_usuario= ? ");
+                pstmt.setString(1, usr.getLogin());
+                pstmt.setString(2, usr.getNombre());
+                pstmt.setString(3, usr.getApellido());
+                pstmt.setString(4, String.valueOf(usr.getRol()));
+                pstmt.setInt(5, usr.getId());
+
+                String sql = pstmt.toString();
+                System.out.println("Succesful "+ sql);
+                UID(pstmt);
+                pstmt.close();
+               
+               
+               
+               mensaje.msgModificacion();
+            }
+        } catch (Exception e) {
+            ep.nuevo("Error", e.getStackTrace().toString(), e.getMessage());
+            mensaje.msgErrorAlModificar();
+        }
+    }
     
      public void agregar(Usuario user) {
 
