@@ -12,9 +12,9 @@ import java.sql.Statement;
 
 public class Conexion implements Serializable {
 
-    private String url = "jdbc:mysql://localhost:3306/prestamos";
+    private String url = "jdbc:mysql://db4free.net:3306/prestamos";
     private String login = "root"; 
-    private String password = "12345";
+    private String password = "123456";
     private Connection cnx = null;
      protected ResultSet rsts = null;
    
